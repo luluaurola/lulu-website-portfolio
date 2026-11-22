@@ -864,11 +864,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const POKEMON_CARDS = {
     charmander: {
-      name: 'Charmender',
+      name: 'Charmander',
       cardNo: 'No.001',
       rarityText: 'Common',
       category: 'pokemon',
-      packTitle: 'Charmender Pack',
+      packTitle: 'Charmander Pack',
       rarityTier: 'common',
       rarityLabel: 'Common',
       rarityBadge: 'Common',
@@ -1225,6 +1225,30 @@ document.addEventListener('DOMContentLoaded', () => {
   const mysteryCardsDisplay = document.getElementById('mystery-cards-display');
   const collectionCompleteCard = document.getElementById('collection-complete-card');
   const btnGotoMemory = document.getElementById('btn-goto-memory');
+
+  const previewBar = document.getElementById('preview-cards-bar');
+  const collectionGridContainer = document.getElementById('collection-grid-container');
+  let isPreviewPinned = false;
+
+  function updatePreviewBarState() {
+    if (!previewBar) return;
+    const isCollectionFull = collectedCards.length >= 10;
+    if (isCollectionFull) {
+      previewBar.classList.add('is-disabled');
+      previewBar.setAttribute('aria-disabled', 'true');
+      previewBar.disabled = true;
+      if (isPreviewPinned || (collectionGridContainer && collectionGridContainer.classList.contains('is-preview-active'))) {
+        isPreviewPinned = false;
+        previewBar.classList.remove('is-active');
+        previewBar.setAttribute('aria-pressed', 'false');
+        if (collectionGridContainer) collectionGridContainer.classList.remove('is-preview-active');
+      }
+    } else {
+      previewBar.classList.remove('is-disabled');
+      previewBar.setAttribute('aria-disabled', 'false');
+      previewBar.disabled = false;
+    }
+  }
 
   const memoryStepsCountEl = document.getElementById('memory-steps-count');
   const memoryPairsCountEl = document.getElementById('memory-pairs-count');
@@ -2390,6 +2414,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tab yang sedang aktif tidak berubah paksa
     setActiveTab(activeCardTab, false);
 
+    // Tombol Preview hanya berfungsi jika koleksi belum lengkap
+    updatePreviewBarState();
+
     // Perbarui tampilan timer, skor terbaik, pasangan, dan leaderboard
     updateMemoryTimerDisplay();
     renderLeaderboard();
@@ -3252,7 +3279,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function buildCardFaceHtml(data, isLocked = false) {
     const lockedClass = isLocked ? " is-locked" : "";
-    return `<div class="pack-card-inner${lockedClass}"><div class="pack-card-header"><div class="pack-card-name" title="${data.name}">${data.name}</div><div class="pack-card-badge">${data.rarityText}</div></div><div class="pack-card-art"><img src="${data.image}" alt="${data.name}" class="pack-card-img" draggable="false" /></div><div class="pack-card-footer"><div class="pack-card-no">${data.cardNo}</div><div class="pack-card-brand">Lulu's Studio</div></div></div>`;
+    const nameLen = (data.name || '').length;
+    const lengthClass = nameLen >= 10 ? " name-xlong" : (nameLen >= 8 ? " name-long" : "");
+    return `<div class="pack-card-inner${lockedClass}"><div class="pack-card-header"><div class="pack-card-name${lengthClass}" title="${data.name}">${data.name}</div><div class="pack-card-badge">${data.rarityText}</div></div><div class="pack-card-art"><img src="${data.image}" alt="${data.name}" class="pack-card-img" draggable="false" /></div><div class="pack-card-footer"><div class="pack-card-no">${data.cardNo}</div><div class="pack-card-brand">Lulu's Studio</div></div></div>`;
+  }
+
+  function adjustCardNamesFit() {
+    const nameEls = document.querySelectorAll('.pack-card .pack-card-name');
+    nameEls.forEach((el) => {
+      const header = el.parentElement;
+      if (!header) return;
+      const badge = header.querySelector('.pack-card-badge');
+      if (!badge) return;
+
+      // Reset inline styles first so CSS container query defaults apply
+      el.style.fontSize = '';
+      el.style.letterSpacing = '';
+
+      const headerWidth = header.clientWidth;
+      const badgeWidth = badge.offsetWidth;
+      const availableWidth = headerWidth - badgeWidth - 2;
+
+      if (availableWidth > 0 && el.scrollWidth > availableWidth) {
+        let currentSize = parseFloat(window.getComputedStyle(el).fontSize) || 11;
+        while (el.scrollWidth > availableWidth && currentSize > 7.2) {
+          currentSize -= 0.25;
+          el.style.fontSize = currentSize.toFixed(1) + 'px';
+        }
+        if (el.scrollWidth > availableWidth) {
+          el.style.letterSpacing = '-0.025em';
+        }
+      }
+    });
   }
 
   function renderCollectionGrid() {
@@ -3322,6 +3380,9 @@ document.addEventListener('DOMContentLoaded', () => {
       slot.setAttribute("aria-label", `Preview Kartu ${data.name} - ${data.rarityText}`);
       slot.innerHTML = buildCardFaceHtml(data, false);
     });
+
+    // Sesuaikan ukuran font otomatis agar nama Pokémon panjang (Charmander, The Trainer, dll) muat utuh
+    adjustCardNamesFit();
   }
 
   function addCardToCollection(cardKey) {
@@ -3567,42 +3628,82 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Card Preview Bar: Hover over bar to preview (desktop), Tab focus to preview (keyboard), click does nothing
-  const previewBar = document.getElementById('preview-cards-bar');
-  const collectionGridContainer = document.getElementById('collection-grid-container');
-
+  // Card Preview Bar: Hover over bar to preview (desktop), Tab focus to preview (keyboard), click/press to toggle persistent soft preview (hanya berfungsi jika kartu belum terkumpul semua)
   if (previewBar && collectionGridContainer) {
-    // 1. Mouse hover: tampilan 10 kartu hanya muncul selama kursor berada di atas bar
+    function togglePreviewState(force) {
+      if (collectedCards.length >= 10) {
+        isPreviewPinned = false;
+        previewBar.classList.remove('is-active');
+        previewBar.setAttribute('aria-pressed', 'false');
+        collectionGridContainer.classList.remove('is-preview-active');
+        return;
+      }
+
+      if (typeof force === 'boolean') {
+        isPreviewPinned = force;
+      } else {
+        isPreviewPinned = !isPreviewPinned;
+      }
+
+      if (isPreviewPinned) {
+        previewBar.classList.add('is-active');
+        previewBar.setAttribute('aria-pressed', 'true');
+        collectionGridContainer.classList.add('is-preview-active');
+        requestAnimationFrame(adjustCardNamesFit);
+      } else {
+        previewBar.classList.remove('is-active');
+        previewBar.setAttribute('aria-pressed', 'false');
+        collectionGridContainer.classList.remove('is-preview-active');
+      }
+    }
+
+    // 1. Mouse hover: tampilan 10 kartu muncul saat kursor berada di atas bar (hanya jika koleksi belum lengkap)
     previewBar.addEventListener('mouseenter', () => {
+      if (collectedCards.length >= 10) return;
       collectionGridContainer.classList.add('is-preview-active');
+      requestAnimationFrame(adjustCardNamesFit);
     });
 
     previewBar.addEventListener('mouseleave', () => {
-      collectionGridContainer.classList.remove('is-preview-active');
-    });
-
-    // 2. Keyboard Tab navigation: fokus menampilkan 10 kartu, blur menyembunyikan
-    previewBar.addEventListener('focus', () => {
-      collectionGridContainer.classList.add('is-preview-active');
-    });
-
-    previewBar.addEventListener('blur', () => {
-      collectionGridContainer.classList.remove('is-preview-active');
-    });
-
-    // Enter atau Spasi toggle preview
-    previewBar.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        collectionGridContainer.classList.toggle('is-preview-active');
+      if (!isPreviewPinned) {
+        collectionGridContainer.classList.remove('is-preview-active');
       }
     });
 
-    // 3. Bar bisa diklik atau ditap untuk toggle preview (membantu di mobile & layar sentuh)
+    // 2. Keyboard Tab navigation: fokus menampilkan 10 kartu, blur menyembunyikan (hanya jika koleksi belum lengkap)
+    previewBar.addEventListener('focus', () => {
+      if (collectedCards.length >= 10) return;
+      collectionGridContainer.classList.add('is-preview-active');
+      requestAnimationFrame(adjustCardNamesFit);
+    });
+
+    previewBar.addEventListener('blur', () => {
+      if (!isPreviewPinned) {
+        collectionGridContainer.classList.remove('is-preview-active');
+      }
+    });
+
+    // Enter atau Spasi toggle preview (hanya jika koleksi belum lengkap)
+    previewBar.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        if (collectedCards.length >= 10) return;
+        togglePreviewState();
+      } else if (e.key === 'Escape' && isPreviewPinned) {
+        e.preventDefault();
+        togglePreviewState(false);
+      }
+    });
+
+    // 3. Bar bisa diklik atau ditap untuk toggle preview (hanya jika koleksi belum lengkap)
     previewBar.addEventListener('click', (e) => {
       e.preventDefault();
-      collectionGridContainer.classList.toggle('is-preview-active');
+      if (collectedCards.length >= 10) return;
+      togglePreviewState();
     });
+
+    window.addEventListener('resize', adjustCardNamesFit, { passive: true });
+    setTimeout(adjustCardNamesFit, 60);
   }
 
   if (btnClosePackModal) btnClosePackModal.addEventListener('click', closePackModal);

@@ -2073,7 +2073,9 @@ body {
   line-height: 1;
   letter-spacing: 0.03em;
   border-radius: 12px;
-  cursor: default;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   text-align: center;
   box-shadow: 0 3px 10px rgba(15, 41, 74, 0.12);
   user-select: none;
@@ -2083,9 +2085,28 @@ body {
   box-sizing: border-box;
 }
 
-.hobby-preview-bar:hover {
+.hobby-preview-bar:not(.is-disabled):not(:disabled):hover,
+.hobby-preview-bar:not(.is-disabled):not(:disabled).is-active {
   background-color: #173862;
   box-shadow: 0 4px 14px rgba(15, 41, 74, 0.18);
+}
+
+.hobby-preview-bar:disabled,
+.hobby-preview-bar.is-disabled {
+  cursor: default !important;
+}
+
+.hobby-preview-bar:disabled:hover,
+.hobby-preview-bar:disabled:focus,
+.hobby-preview-bar:disabled:active,
+.hobby-preview-bar.is-disabled:hover,
+.hobby-preview-bar.is-disabled:focus,
+.hobby-preview-bar.is-disabled:active {
+  background-color: var(--color-navy) !important;
+  box-shadow: 0 3px 10px rgba(15, 41, 74, 0.12) !important;
+  outline: none !important;
+  transform: none !important;
+  cursor: default !important;
 }
 
 .hobby-preview-bar:focus-visible {
@@ -2134,7 +2155,7 @@ body {
 .card-pack-grid.game-grid {
   position: relative;
   opacity: 1;
-  transition: opacity 180ms ease-in-out;
+  transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 1;
 }
 
@@ -2146,20 +2167,22 @@ body {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity 180ms ease-in-out, visibility 180ms ease-in-out;
+  transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1), visibility 280ms cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2;
 }
 
-/* Transisi fade halus 180ms saat hover atau keyboard focus ke bar Preview */
-.hobby-preview-bar:hover~.collection-grid-container .preview-overlay-grid,
-.hobby-preview-bar:focus-visible~.collection-grid-container .preview-overlay-grid,
+/* Transisi fade halus 280ms saat hover, focus, atau toggle active ke bar Preview (hanya saat belum lengkap / tidak disabled) */
+.hobby-preview-bar:not(.is-disabled):not(:disabled):hover~.collection-grid-container .preview-overlay-grid,
+.hobby-preview-bar:not(.is-disabled):not(:disabled):focus-visible~.collection-grid-container .preview-overlay-grid,
+.hobby-preview-bar:not(.is-disabled):not(:disabled).is-active~.collection-grid-container .preview-overlay-grid,
 .collection-grid-container.is-preview-active .preview-overlay-grid {
   opacity: 1;
   visibility: visible;
 }
 
-.hobby-preview-bar:hover~.collection-grid-container .game-grid,
-.hobby-preview-bar:focus-visible~.collection-grid-container .game-grid,
+.hobby-preview-bar:not(.is-disabled):not(:disabled):hover~.collection-grid-container .game-grid,
+.hobby-preview-bar:not(.is-disabled):not(:disabled):focus-visible~.collection-grid-container .game-grid,
+.hobby-preview-bar:not(.is-disabled):not(:disabled).is-active~.collection-grid-container .game-grid,
 .collection-grid-container.is-preview-active .game-grid {
   opacity: 0;
 }
@@ -2176,15 +2199,16 @@ body {
   border: 2.5px solid #8fc2fc !important;
   border-radius: 13px;
   box-shadow: 0 4px 14px rgba(143, 194, 252, 0.25);
-  opacity: 1 !important;
+  opacity: 0.82 !important;
   filter: none !important;
+  transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .pack-card.is-preview:active {
   transform: none;
 }
 
-/* Mode Preview: Seluruh 10 kartu tampil utuh, jelas, dan berwarna penuh */
+/* Mode Preview: Seluruh 10 kartu tampil dengan soft opacity dan teks jelas terlihat */
 .card-pack-grid.preview-overlay-grid .pack-card,
 .card-pack-grid.preview-overlay-grid .pack-card.is-unowned,
 .card-pack-grid.preview-overlay-grid .pack-card[data-locked="true"],
@@ -2194,12 +2218,13 @@ body {
   cursor: default !important;
   user-select: none;
   -webkit-user-select: none;
-  opacity: 1 !important;
+  opacity: 0.82 !important;
   filter: none !important;
   pointer-events: none;
   background-color: #ffffff !important;
   border: 2.5px solid #8fc2fc !important;
   border-radius: 13px;
+  transition: opacity 280ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* Kartu di mode preview tidak interaktif (tidak bereaksi hover/active) */
@@ -2221,7 +2246,7 @@ body {
 [data-theme="dark"] .preview-mini-card {
   background-color: #ffffff !important;
   border-color: #8fc2fc !important;
-  opacity: 1 !important;
+  opacity: 0.82 !important;
   filter: none !important;
 }
 
@@ -2230,15 +2255,15 @@ body {
    ========================================================================== */
 @media (hover: none) {
 
-  .hobby-preview-bar:hover~.collection-grid-container .preview-overlay-grid,
-  .hobby-preview-bar:focus-visible~.collection-grid-container .preview-overlay-grid,
+  .hobby-preview-bar:not(.is-disabled):hover~.collection-grid-container .preview-overlay-grid,
+  .hobby-preview-bar:not(.is-disabled):focus-visible~.collection-grid-container .preview-overlay-grid,
   .collection-grid-container.is-preview-active .preview-overlay-grid {
     opacity: 1 !important;
     visibility: visible !important;
   }
 
-  .hobby-preview-bar:hover~.collection-grid-container .game-grid,
-  .hobby-preview-bar:focus-visible~.collection-grid-container .game-grid,
+  .hobby-preview-bar:not(.is-disabled):hover~.collection-grid-container .game-grid,
+  .hobby-preview-bar:not(.is-disabled):focus-visible~.collection-grid-container .game-grid,
   .collection-grid-container.is-preview-active .game-grid {
     opacity: 0 !important;
   }
@@ -2365,7 +2390,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 6px 7px;
+  padding: 5px 6px;
   box-sizing: border-box;
   overflow: hidden;
   position: relative;
@@ -2376,45 +2401,70 @@ body {
 .pack-card .pack-card-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   width: 100%;
-  gap: 3px;
+  gap: 2px;
   line-height: 1.1;
   flex-shrink: 0;
   position: relative;
   z-index: 2;
-  min-height: 20px;
+  min-height: 18px;
 }
 
 .pack-card .pack-card-name {
   font-family: var(--font-display) !important;
-  font-size: clamp(9.2px, 9.6cqi, 13px) !important;
-  font-weight: 400 !important;
+  font-size: clamp(9.5px, 10.5cqi, 13.5px) !important;
+  font-weight: 700 !important;
   color: #0f294a !important;
   letter-spacing: -0.01em;
-  line-height: 1.1 !important;
+  line-height: 1.12 !important;
   flex: 1 1 auto;
   min-width: 0;
   white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
   text-align: left !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Penyesuaian proporsional otomatis agar nama panjang selalu muat utuh dalam satu baris */
+.pack-card[data-card="charmander"] .pack-card-name,
+.pack-card.card-slot-1 .pack-card-name,
+.pack-card-name.name-xlong {
+  font-size: clamp(8.6px, 9.2cqi, 11.8px) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.pack-card[data-card="ultra"] .pack-card-name,
+.pack-card.card-slot-10 .pack-card-name {
+  font-size: clamp(8.2px, 8.8cqi, 11.2px) !important;
+  letter-spacing: -0.02em !important;
+}
+
+.pack-card[data-card="oshawott"] .pack-card-name,
+.pack-card[data-card="minccino"] .pack-card-name,
+.pack-card.card-slot-3 .pack-card-name,
+.pack-card.card-slot-9 .pack-card-name,
+.pack-card-name.name-long {
+  font-size: clamp(9px, 9.8cqi, 12.5px) !important;
+  letter-spacing: -0.015em !important;
 }
 
 .pack-card .pack-card-badge {
   background-color: #0f294a !important;
   color: #ffffff !important;
   font-family: var(--font-body) !important;
-  font-size: clamp(7px, 7.5cqi, 9.6px) !important;
+  font-size: clamp(6.2px, 6.8cqi, 8.5px) !important;
   font-weight: 400 !important;
-  padding: 1.5px clamp(3.5px, 4cqi, 6px) !important;
+  padding: 1.5px clamp(3px, 3.5cqi, 5.5px) !important;
   border-radius: 9999px !important;
   line-height: 1.15 !important;
   white-space: nowrap !important;
   letter-spacing: 0.01em;
   flex-shrink: 0;
   margin-left: 2px;
-  align-self: center;
+  align-self: flex-start;
+  margin-top: 1px;
 }
 
 .pack-card .pack-card-art {
@@ -2445,7 +2495,8 @@ body {
   -webkit-user-select: none;
   -webkit-user-drag: none;
   pointer-events: none;
-  filter: drop-shadow(0 2px 4px rgba(15, 41, 74, 0.1));
+  filter: none !important;
+  box-shadow: none !important;
 }
 
 .pack-card.tier-ultra .pack-card-art .pack-card-img,
@@ -2461,7 +2512,7 @@ body {
   line-height: 1 !important;
   font-family: var(--font-body) !important;
   color: #0f294a !important;
-  font-size: clamp(7.2px, 7.8cqi, 10px) !important;
+  font-size: clamp(7.5px, 8.2cqi, 10.5px) !important;
   flex-shrink: 0;
   position: relative;
   z-index: 2;
@@ -2470,7 +2521,7 @@ body {
 
 .pack-card .pack-card-no {
   font-family: var(--font-body) !important;
-  font-size: clamp(6.8px, 7.5cqi, 9.2px) !important;
+  font-size: clamp(7.5px, 8.2cqi, 10.5px) !important;
   font-weight: 400 !important;
   color: #0f294a !important;
   letter-spacing: 0.01em;
@@ -2480,7 +2531,7 @@ body {
 
 .pack-card .pack-card-brand {
   font-family: var(--font-body) !important;
-  font-size: clamp(6.8px, 7.5cqi, 9.2px) !important;
+  font-size: clamp(7.5px, 8.2cqi, 10.5px) !important;
   font-weight: 400 !important;
   color: #0f294a !important;
   letter-spacing: 0.01em;
@@ -4311,6 +4362,8 @@ body {
   -webkit-user-drag: none;
   transform: scale(1.35);
   transition: transform var(--transition-fast);
+  filter: none !important;
+  box-shadow: none !important;
 }
 
 .memory-card-img.is-ultra,
@@ -9233,7 +9286,8 @@ body.memory-dialog-open {
   display: block;
   margin: auto;
   border-radius: 14px;
-  filter: none;
+  filter: none !important;
+  box-shadow: none !important;
 }
 
 .card-front-footer {
