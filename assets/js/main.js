@@ -5226,7 +5226,6 @@ document.addEventListener('DOMContentLoaded', () => {
           'width="' + boardW.toFixed(2) + '" height="' + boardH.toFixed(2) + '" ' +
           'clip-path="url(#jigsaw-clip-' + pieceIdx + ')" ' +
           'preserveAspectRatio="xMidYMid meet"></image>' +
-          '<path d="' + pathD + '" class="jigsaw-piece-tint"></path>' +
           '<path d="' + pathD + '" fill="none" class="jigsaw-piece-stroke"></path>' +
           '</svg>';
 
@@ -5284,8 +5283,6 @@ document.addEventListener('DOMContentLoaded', () => {
           if (clipPathD) clipPathD.setAttribute('d', pathD);
           const bgPath = svgEl.querySelector('.jigsaw-piece-bg');
           if (bgPath) bgPath.setAttribute('d', pathD);
-          const tintPath = svgEl.querySelector('.jigsaw-piece-tint');
-          if (tintPath) tintPath.setAttribute('d', pathD);
           const strokePath = svgEl.querySelector('.jigsaw-piece-stroke');
           if (strokePath) strokePath.setAttribute('d', pathD);
           const imgEl = svgEl.querySelector('image');

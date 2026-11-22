@@ -1968,7 +1968,7 @@ body {
 
 .hobbies-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 1.5rem;
   width: 100%;
   align-items: stretch;
@@ -2694,7 +2694,7 @@ body {
 .puzzle-board {
   position: relative;
   aspect-ratio: 744 / 1039;
-  height: clamp(260px, 28vw, 320px);
+  height: clamp(290px, 30vw, 360px);
   max-width: 100%;
   width: auto;
   border-radius: 14px;
@@ -2733,11 +2733,20 @@ body {
   user-select: none;
   -webkit-user-select: none;
   -webkit-touch-callout: none;
+  background: none !important;
+  background-color: transparent !important;
+  opacity: 1 !important;
   transition: left 0.2s cubic-bezier(0.2, 0.8, 0.4, 1),
     top 0.2s cubic-bezier(0.2, 0.8, 0.4, 1),
     transform 0.2s cubic-bezier(0.2, 0.8, 0.4, 1),
     filter 0.2s ease;
   z-index: 5;
+}
+
+.puzzle-piece::before,
+.puzzle-piece::after {
+  content: none !important;
+  display: none !important;
 }
 
 .jigsaw-piece-svg {
@@ -2746,20 +2755,29 @@ body {
   height: 100%;
   overflow: visible;
   pointer-events: auto;
+  background: none !important;
 }
 
-/* 3. Unsolved Piece (Default): Solid white background, soft light blue outline */
+.puzzle-piece image,
+.jigsaw-piece-svg image {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+/* Jigsaw piece backing: solid white behind image, never any colored tint or opacity */
 .jigsaw-piece-bg {
-  fill: #ffffff;
-  transition: fill 0.2s ease;
+  fill: #ffffff !important;
+  opacity: 1 !important;
+  transition: none;
 }
 
 .jigsaw-piece-tint {
-  fill: transparent;
-  pointer-events: none;
-  transition: fill 0.2s ease;
+  display: none !important;
+  fill: none !important;
+  opacity: 0 !important;
 }
 
+/* 1. Unsolved Piece (Default): clean light outline */
 .jigsaw-piece-stroke {
   stroke: #c2d8fa;
   stroke-width: 1.5;
@@ -2767,24 +2785,27 @@ body {
   stroke-linecap: round;
   stroke-linejoin: round;
   transition: stroke 0.2s ease, stroke-width 0.2s ease;
+  vector-effect: non-scaling-stroke;
 }
 
 .puzzle-piece:hover {
-  filter: drop-shadow(0 2px 6px rgba(15, 41, 74, 0.16));
+  filter: drop-shadow(0 0 3px rgba(37, 99, 235, 0.4));
 }
 
-/* 1. Correct Piece (Snap in place): Soft light blue highlight, clear soft light blue outline (NO GREEN) */
+/* 2. Correct Piece (Snap in place): outline biru muda, NO tint, image 100% normal */
 .puzzle-piece.is-correct-slot {
   z-index: 15;
-  filter: drop-shadow(0 2px 8px rgba(71, 151, 242, 0.28));
+  filter: none;
 }
 
 .puzzle-piece.is-correct-slot .jigsaw-piece-bg {
-  fill: #edf5ff;
+  fill: #ffffff !important;
 }
 
 .puzzle-piece.is-correct-slot .jigsaw-piece-tint {
-  fill: rgba(71, 151, 242, 0.15);
+  display: none !important;
+  fill: none !important;
+  opacity: 0 !important;
 }
 
 .puzzle-piece.is-correct-slot .jigsaw-piece-stroke {
@@ -2797,26 +2818,27 @@ body {
   vector-effect: non-scaling-stroke;
 }
 
-/* 2. Active Piece (Selected or Dragging): Clean blue outline with subtle glow, NO background fill, NO overlay/opacity on the inside */
+/* 3. Selected / Active Piece: outline biru tua, subtle outer blue glow, NO fill, NO overlay, image 100% normal */
 .puzzle-piece.is-selected {
   transform: translateY(-4px) scale(1.05);
   z-index: 60 !important;
-  filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.6)) drop-shadow(0 8px 18px rgba(15, 41, 74, 0.3)) !important;
+  filter: drop-shadow(0 0 5px rgba(37, 99, 235, 0.6)) !important;
 }
 
 .puzzle-piece.is-selected .jigsaw-piece-bg,
 .puzzle-piece.is-dragging .jigsaw-piece-bg,
 .puzzle-piece.is-selected.is-correct-slot .jigsaw-piece-bg,
 .puzzle-piece.is-dragging.is-correct-slot .jigsaw-piece-bg {
-  fill: transparent !important;
-  opacity: 0 !important;
+  fill: #ffffff !important;
+  opacity: 1 !important;
 }
 
 .puzzle-piece.is-selected .jigsaw-piece-tint,
 .puzzle-piece.is-dragging .jigsaw-piece-tint,
 .puzzle-piece.is-selected.is-correct-slot .jigsaw-piece-tint,
 .puzzle-piece.is-dragging.is-correct-slot .jigsaw-piece-tint {
-  fill: transparent !important;
+  display: none !important;
+  fill: none !important;
   opacity: 0 !important;
 }
 
@@ -2830,11 +2852,11 @@ body {
   vector-effect: non-scaling-stroke;
 }
 
-/* Dragging piece: follows pointer smoothly with elevated shadow and subtle blue glow */
+/* Dragging piece: follows pointer smoothly with elevated outer blue glow */
 .puzzle-piece.is-dragging {
   cursor: grabbing !important;
   z-index: 100 !important;
-  filter: drop-shadow(0 0 6px rgba(59, 130, 246, 0.65)) drop-shadow(0 12px 24px rgba(15, 41, 74, 0.35)) !important;
+  filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.75)) !important;
   transition: none !important;
 }
 
@@ -2845,7 +2867,7 @@ body {
   stroke-dasharray: 4 2 !important;
 }
 
-/* Solved board styling: maintain clear light blue outline and subtle glow on every piece */
+/* Solved board styling: maintain clear light blue outline on every piece */
 .puzzle-board.is-solved .puzzle-piece.is-correct-slot .jigsaw-piece-stroke,
 .puzzle-board.is-solved .puzzle-piece .jigsaw-piece-stroke {
   stroke: #4797f2 !important;
@@ -2858,7 +2880,8 @@ body {
 }
 
 .puzzle-board.is-solved .puzzle-piece .jigsaw-piece-tint {
-  fill: rgba(71, 151, 242, 0.1) !important;
+  display: none !important;
+  fill: none !important;
 }
 
 /* Peek Overlay (Lihat Petunjuk - Hover Preview) */
@@ -3101,11 +3124,11 @@ body {
 }
 
 [data-theme="dark"] .puzzle-piece.is-selected {
-  filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.75)) drop-shadow(0 8px 18px rgba(0, 0, 0, 0.5)) !important;
+  filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.85)) !important;
 }
 
 [data-theme="dark"] .puzzle-piece.is-dragging {
-  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.85)) drop-shadow(0 12px 24px rgba(0, 0, 0, 0.6)) !important;
+  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.95)) !important;
 }
 
 .btn-hobby-action {
