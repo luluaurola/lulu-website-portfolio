@@ -4974,7 +4974,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentConfig = PUZZLE_LEVELS[currentLevelKey];
     let totalPieces = currentConfig.cols * currentConfig.rows;
     let boardState = []; // boardState[slotIndex] = pieceIndex
-    let pieceEdges = []; // pieceEdges[pieceIndex] = { top, right, bottom, left }
+    let slotEdges = []; // slotEdges[slotIndex] = { top, right, bottom, left }
     let selectedSlot = null;
     let moves = 0;
     let timerSeconds = 0;
@@ -5084,24 +5084,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function getBoardDimensions() {
-      const rect = boardEl.getBoundingClientRect();
-      const boardW = rect.width || boardEl.clientWidth || Math.round(300 * (744 / 1039));
-      const boardH = rect.height || boardEl.clientHeight || Math.round(boardW * (1039 / 744));
+      const boardW = boardEl.clientWidth || Math.round(300 * (744 / 1039));
+      const boardH = boardEl.clientHeight || Math.round(boardW * (1039 / 744));
       return { boardW, boardH };
     }
 
-    function getSlotCoords(slotIdx, cellW, cellH, tabSize) {
+    function getSlotCoords(slotIdx, cellW, cellH, m) {
       const cols = currentConfig.cols;
       const sc = slotIdx % cols;
       const sr = Math.floor(slotIdx / cols);
       return {
-        left: sc * cellW - tabSize,
-        top: sr * cellH - tabSize
+        left: sc * cellW - m,
+        top: sr * cellH - m
       };
     }
 
-    function buildJigsawPath(w, h, topE, rightE, botE, leftE, tab) {
-      const m = tab;
+    function buildJigsawPath(w, h, topE, rightE, botE, leftE, tab, m) {
       function edge(x0, y0, x1, y1, dir) {
         if (dir === 0) {
           return 'L ' + x1.toFixed(2) + ' ' + y1.toFixed(2);
@@ -5157,15 +5155,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       }
 
-      pieceEdges = [];
-      for (let p = 0; p < totalPieces; p++) {
-        const pr = Math.floor(p / cols);
-        const pc = p % cols;
-        pieceEdges[p] = {
-          top: pr === 0 ? 0 : -hEdges[pr - 1][pc],
-          right: pc === cols - 1 ? 0 : vEdges[pr][pc],
-          bottom: pr === rows - 1 ? 0 : hEdges[pr][pc],
-          left: pc === 0 ? 0 : -vEdges[pr][pc - 1]
+      slotEdges = [];
+      for (let s = 0; s < totalPieces; s++) {
+        const sr = Math.floor(s / cols);
+        const sc = s % cols;
+        slotEdges[s] = {
+          top: sr === 0 ? 0 : -hEdges[sr - 1][sc],
+          right: sc === cols - 1 ? 0 : vEdges[sr][sc],
+          bottom: sr === rows - 1 ? 0 : hEdges[sr][sc],
+          left: sc === 0 ? 0 : -vEdges[sr][sc - 1]
         };
       }
     }
@@ -5179,19 +5177,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const cellW = boardW / cols;
       const cellH = boardH / rows;
       const tabSize = Math.round(0.22 * Math.min(cellW, cellH));
-      const pieceW = cellW + 2 * tabSize;
-      const pieceH = cellH + 2 * tabSize;
+      const strokePad = 6;
+      const m = tabSize + strokePad;
+      const pieceW = cellW + 2 * m;
+      const pieceH = cellH + 2 * m;
 
       for (let slotIdx = 0; slotIdx < totalPieces; slotIdx++) {
         const pieceIdx = boardState[slotIdx];
         const pc = pieceIdx % cols;
         const pr = Math.floor(pieceIdx / cols);
-        const edges = pieceEdges[pieceIdx];
-        const pathD = buildJigsawPath(cellW, cellH, edges.top, edges.right, edges.bottom, edges.left, tabSize);
-        const coords = getSlotCoords(slotIdx, cellW, cellH, tabSize);
+        const edges = slotEdges[slotIdx];
+        const pathD = buildJigsawPath(cellW, cellH, edges.top, edges.right, edges.bottom, edges.left, tabSize, m);
+        const coords = getSlotCoords(slotIdx, cellW, cellH, m);
 
-        const imgX = tabSize - pc * cellW;
-        const imgY = tabSize - pr * cellH;
+        const imgX = m - pc * cellW;
+        const imgY = m - pr * cellH;
 
         const pieceEl = document.createElement('div');
         pieceEl.className = 'puzzle-piece';
@@ -5216,15 +5216,15 @@ document.addEventListener('DOMContentLoaded', () => {
         pieceEl.innerHTML =
           '<svg viewBox="0 0 ' + pieceW.toFixed(2) + ' ' + pieceH.toFixed(2) + '" class="jigsaw-piece-svg" aria-hidden="true">' +
           '<defs>' +
-          '<clipPath id="jigsaw-clip-' + pieceIdx + '">' +
+          '<clipPath id="jigsaw-clip-slot-' + slotIdx + '">' +
           '<path d="' + pathD + '"></path>' +
           '</clipPath>' +
           '</defs>' +
-          '<path d="' + pathD + '" class="jigsaw-piece-bg"></path>' +
+          '<path d="' + pathD + '" fill="#ffffff" class="jigsaw-piece-bg"></path>' +
           '<image href="assets/image/pokemon/cardultra.png" ' +
           'x="' + imgX.toFixed(2) + '" y="' + imgY.toFixed(2) + '" ' +
           'width="' + boardW.toFixed(2) + '" height="' + boardH.toFixed(2) + '" ' +
-          'clip-path="url(#jigsaw-clip-' + pieceIdx + ')" ' +
+          'clip-path="url(#jigsaw-clip-slot-' + slotIdx + ')" ' +
           'preserveAspectRatio="xMidYMid meet"></image>' +
           '<path d="' + pathD + '" fill="none" class="jigsaw-piece-stroke"></path>' +
           '</svg>';
@@ -5253,8 +5253,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const cellW = boardW / cols;
       const cellH = boardH / rows;
       const tabSize = Math.round(0.22 * Math.min(cellW, cellH));
-      const pieceW = cellW + 2 * tabSize;
-      const pieceH = cellH + 2 * tabSize;
+      const strokePad = 6;
+      const m = tabSize + strokePad;
+      const pieceW = cellW + 2 * m;
+      const pieceH = cellH + 2 * m;
 
       const pieceEls = slotsContainer.querySelectorAll('.puzzle-piece');
       pieceEls.forEach((pieceEl) => {
@@ -5262,7 +5264,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pieceIdx = parseInt(pieceEl.getAttribute('data-piece'), 10);
         if (isNaN(slotIdx) || isNaN(pieceIdx)) return;
 
-        const coords = getSlotCoords(slotIdx, cellW, cellH, tabSize);
+        const coords = getSlotCoords(slotIdx, cellW, cellH, m);
         pieceEl.style.left = coords.left.toFixed(2) + 'px';
         pieceEl.style.top = coords.top.toFixed(2) + 'px';
         pieceEl.style.width = pieceW.toFixed(2) + 'px';
@@ -5270,11 +5272,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const pc = pieceIdx % cols;
         const pr = Math.floor(pieceIdx / cols);
-        const edges = pieceEdges[pieceIdx];
+        const edges = slotEdges[slotIdx];
         if (!edges) return;
-        const pathD = buildJigsawPath(cellW, cellH, edges.top, edges.right, edges.bottom, edges.left, tabSize);
-        const imgX = tabSize - pc * cellW;
-        const imgY = tabSize - pr * cellH;
+        const pathD = buildJigsawPath(cellW, cellH, edges.top, edges.right, edges.bottom, edges.left, tabSize, m);
+        const imgX = m - pc * cellW;
+        const imgY = m - pr * cellH;
 
         const svgEl = pieceEl.querySelector('svg');
         if (svgEl) {
@@ -5282,7 +5284,10 @@ document.addEventListener('DOMContentLoaded', () => {
           const clipPathD = svgEl.querySelector('clipPath path');
           if (clipPathD) clipPathD.setAttribute('d', pathD);
           const bgPath = svgEl.querySelector('.jigsaw-piece-bg');
-          if (bgPath) bgPath.setAttribute('d', pathD);
+          if (bgPath) {
+            bgPath.setAttribute('d', pathD);
+            bgPath.setAttribute('fill', '#ffffff');
+          }
           const strokePath = svgEl.querySelector('.jigsaw-piece-stroke');
           if (strokePath) strokePath.setAttribute('d', pathD);
           const imgEl = svgEl.querySelector('image');
@@ -5352,6 +5357,50 @@ document.addEventListener('DOMContentLoaded', () => {
       updateBestScoreDisplay();
     }
 
+    function updatePiecePath(pieceEl, slotIdx) {
+      if (!pieceEl || !slotEdges[slotIdx]) return;
+      const { boardW, boardH } = getBoardDimensions();
+      const cols = currentConfig.cols;
+      const rows = currentConfig.rows;
+      const cellW = boardW / cols;
+      const cellH = boardH / rows;
+      const tabSize = Math.round(0.22 * Math.min(cellW, cellH));
+      const strokePad = 6;
+      const m = tabSize + strokePad;
+      const pieceW = cellW + 2 * m;
+      const pieceH = cellH + 2 * m;
+
+      const edges = slotEdges[slotIdx];
+      const pathD = buildJigsawPath(cellW, cellH, edges.top, edges.right, edges.bottom, edges.left, tabSize, m);
+
+      const pieceIdx = parseInt(pieceEl.getAttribute('data-piece'), 10);
+      const pc = pieceIdx % cols;
+      const pr = Math.floor(pieceIdx / cols);
+      const imgX = m - pc * cellW;
+      const imgY = m - pr * cellH;
+
+      const svgEl = pieceEl.querySelector('svg');
+      if (svgEl) {
+        svgEl.setAttribute('viewBox', '0 0 ' + pieceW.toFixed(2) + ' ' + pieceH.toFixed(2));
+        const clipPathD = svgEl.querySelector('clipPath path');
+        if (clipPathD) clipPathD.setAttribute('d', pathD);
+        const bgPath = svgEl.querySelector('.jigsaw-piece-bg');
+        if (bgPath) {
+          bgPath.setAttribute('d', pathD);
+          bgPath.setAttribute('fill', '#ffffff');
+        }
+        const strokePath = svgEl.querySelector('.jigsaw-piece-stroke');
+        if (strokePath) strokePath.setAttribute('d', pathD);
+        const imgEl = svgEl.querySelector('image');
+        if (imgEl) {
+          imgEl.setAttribute('x', imgX.toFixed(2));
+          imgEl.setAttribute('y', imgY.toFixed(2));
+          imgEl.setAttribute('width', boardW.toFixed(2));
+          imgEl.setAttribute('height', boardH.toFixed(2));
+        }
+      }
+    }
+
     function swapSlots(slotA, slotB) {
       if (slotA === slotB || isSolved) return;
 
@@ -5369,9 +5418,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const cellW = boardW / currentConfig.cols;
       const cellH = boardH / currentConfig.rows;
       const tabSize = Math.round(0.22 * Math.min(cellW, cellH));
+      const strokePad = 6;
+      const m = tabSize + strokePad;
 
-      const coordsA = getSlotCoords(slotA, cellW, cellH, tabSize);
-      const coordsB = getSlotCoords(slotB, cellW, cellH, tabSize);
+      const coordsA = getSlotCoords(slotA, cellW, cellH, m);
+      const coordsB = getSlotCoords(slotB, cellW, cellH, m);
 
       const elA = slotsContainer.querySelector('.puzzle-piece[data-slot="' + slotA + '"]');
       const elB = slotsContainer.querySelector('.puzzle-piece[data-slot="' + slotB + '"]');
@@ -5382,12 +5433,14 @@ document.addEventListener('DOMContentLoaded', () => {
         elA.setAttribute('data-slot', String(slotB));
         elA.classList.toggle('is-correct-slot', pieceA === slotB);
         elA.classList.remove('is-selected');
+        updatePiecePath(elA, slotB);
 
         elB.style.left = coordsA.left.toFixed(2) + 'px';
         elB.style.top = coordsA.top.toFixed(2) + 'px';
         elB.setAttribute('data-slot', String(slotA));
         elB.classList.toggle('is-correct-slot', pieceB === slotA);
         elB.classList.remove('is-selected');
+        updatePiecePath(elB, slotA);
       }
 
       updateStats();
@@ -5459,7 +5512,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (isDragging) {
         e.preventDefault();
-        activeDragPiece.style.transform = 'translate(' + dx + 'px, ' + dy + 'px) scale(1.05)';
+        activeDragPiece.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
 
         // Find target piece under pointer
         const hits = document.elementsFromPoint ? document.elementsFromPoint(e.clientX, e.clientY) : [document.elementFromPoint(e.clientX, e.clientY)];

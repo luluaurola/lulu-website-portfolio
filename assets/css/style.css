@@ -1968,7 +1968,7 @@ body {
 
 .hobbies-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.22fr) minmax(0, 0.78fr);
   gap: 1.5rem;
   width: 100%;
   align-items: stretch;
@@ -2388,7 +2388,7 @@ body {
 
 .pack-card .pack-card-name {
   font-family: var(--font-display) !important;
-  font-size: clamp(8.8px, 9.4cqi, 11.5px) !important;
+  font-size: clamp(9.2px, 9.6cqi, 13px) !important;
   font-weight: 400 !important;
   color: #0f294a !important;
   letter-spacing: -0.01em;
@@ -2405,7 +2405,7 @@ body {
   background-color: #0f294a !important;
   color: #ffffff !important;
   font-family: var(--font-body) !important;
-  font-size: clamp(6.6px, 7.2cqi, 8.8px) !important;
+  font-size: clamp(7px, 7.5cqi, 9.6px) !important;
   font-weight: 400 !important;
   padding: 1.5px clamp(3.5px, 4cqi, 6px) !important;
   border-radius: 9999px !important;
@@ -2461,7 +2461,7 @@ body {
   line-height: 1 !important;
   font-family: var(--font-body) !important;
   color: #0f294a !important;
-  font-size: clamp(6.8px, 7.5cqi, 9px) !important;
+  font-size: clamp(7.2px, 7.8cqi, 10px) !important;
   flex-shrink: 0;
   position: relative;
   z-index: 2;
@@ -2577,7 +2577,7 @@ body {
 .puzzle-game-area {
   background-color: #ffffff;
   border-radius: 20px;
-  padding: 0.85rem 1rem 1rem;
+  padding: 0.75rem 0.85rem 0.85rem;
   border: 1px solid #dce8f8;
   box-shadow: 0 4px 18px rgba(15, 41, 74, 0.06);
   display: flex;
@@ -2694,7 +2694,7 @@ body {
 .puzzle-board {
   position: relative;
   aspect-ratio: 744 / 1039;
-  height: clamp(290px, 30vw, 360px);
+  height: clamp(250px, 24vw, 310px);
   max-width: 100%;
   width: auto;
   border-radius: 14px;
@@ -2717,7 +2717,8 @@ body {
   height: 100%;
   box-sizing: border-box;
   background-color: #ffffff;
-  overflow: visible;
+  border-radius: 11.5px;
+  overflow: hidden;
   touch-action: none;
   -webkit-touch-callout: none;
   user-select: none;
@@ -2777,10 +2778,10 @@ body {
   opacity: 0 !important;
 }
 
-/* 1. Unsolved Piece (Default): clean light outline */
+/* 1. Unsolved Piece (Default): outline biru muda sesuai warna garis dasar puzzle */
 .jigsaw-piece-stroke {
-  stroke: #c2d8fa;
-  stroke-width: 1.5;
+  stroke: #8fc2fc;
+  stroke-width: 2.2px;
   fill: none;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -2792,9 +2793,9 @@ body {
   filter: drop-shadow(0 0 3px rgba(37, 99, 235, 0.4));
 }
 
-/* 2. Correct Piece (Snap in place): outline biru muda, NO tint, image 100% normal */
+/* 2. Correct Piece (Snap in place): outline biru muda, sama dengan warna garis dasar puzzle */
 .puzzle-piece.is-correct-slot {
-  z-index: 15;
+  z-index: 10;
   filter: none;
 }
 
@@ -2809,8 +2810,8 @@ body {
 }
 
 .puzzle-piece.is-correct-slot .jigsaw-piece-stroke {
-  stroke: #4797f2 !important;
-  stroke-width: 2.6px !important;
+  stroke: #8fc2fc !important;
+  stroke-width: 2.2px !important;
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 1 !important;
@@ -2818,11 +2819,10 @@ body {
   vector-effect: non-scaling-stroke;
 }
 
-/* 3. Selected / Active Piece: outline biru tua, subtle outer blue glow, NO fill, NO overlay, image 100% normal */
+/* 3. Selected / Active Piece: outline BIRU TUA (NAVY #0f294a) saat diklik/dipilih/di-drag, NO fill, NO overlay, gambar 100% normal */
 .puzzle-piece.is-selected {
-  transform: translateY(-4px) scale(1.05);
   z-index: 60 !important;
-  filter: drop-shadow(0 0 5px rgba(37, 99, 235, 0.6)) !important;
+  filter: drop-shadow(0 0 4px rgba(15, 41, 74, 0.55)) !important;
 }
 
 .puzzle-piece.is-selected .jigsaw-piece-bg,
@@ -2845,18 +2845,20 @@ body {
 .puzzle-piece.is-selected .jigsaw-piece-stroke,
 .puzzle-piece.is-dragging .jigsaw-piece-stroke {
   stroke: #0f294a !important;
-  stroke-width: 3.5px !important;
+  stroke-width: 3.2px !important;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   stroke-dasharray: none !important;
   opacity: 1 !important;
   visibility: visible !important;
   vector-effect: non-scaling-stroke;
 }
 
-/* Dragging piece: follows pointer smoothly with elevated outer blue glow */
+/* Dragging piece: follows pointer smoothly with elevated navy glow */
 .puzzle-piece.is-dragging {
   cursor: grabbing !important;
   z-index: 100 !important;
-  filter: drop-shadow(0 0 6px rgba(37, 99, 235, 0.75)) !important;
+  filter: drop-shadow(0 0 5px rgba(15, 41, 74, 0.65)) !important;
   transition: none !important;
 }
 
@@ -2870,8 +2872,8 @@ body {
 /* Solved board styling: maintain clear light blue outline on every piece */
 .puzzle-board.is-solved .puzzle-piece.is-correct-slot .jigsaw-piece-stroke,
 .puzzle-board.is-solved .puzzle-piece .jigsaw-piece-stroke {
-  stroke: #4797f2 !important;
-  stroke-width: 2.6px !important;
+  stroke: #8fc2fc !important;
+  stroke-width: 2.2px !important;
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 1 !important;
@@ -3109,26 +3111,27 @@ body {
 
 [data-theme="dark"] .jigsaw-piece-stroke {
   stroke: #8fc2fc;
+  stroke-width: 2.2px;
 }
 
 [data-theme="dark"] .puzzle-piece.is-correct-slot .jigsaw-piece-stroke,
 [data-theme="dark"] .puzzle-board.is-solved .puzzle-piece .jigsaw-piece-stroke {
-  stroke: #539be8 !important;
-  stroke-width: 2.6px !important;
+  stroke: #8fc2fc !important;
+  stroke-width: 2.2px !important;
 }
 
 [data-theme="dark"] .puzzle-piece.is-selected .jigsaw-piece-stroke,
 [data-theme="dark"] .puzzle-piece.is-dragging .jigsaw-piece-stroke {
-  stroke: #60a5fa !important;
-  stroke-width: 3.5px !important;
+  stroke: #0f294a !important;
+  stroke-width: 3.2px !important;
 }
 
 [data-theme="dark"] .puzzle-piece.is-selected {
-  filter: drop-shadow(0 0 6px rgba(96, 165, 250, 0.85)) !important;
+  filter: drop-shadow(0 0 6px rgba(15, 41, 74, 0.85)) !important;
 }
 
 [data-theme="dark"] .puzzle-piece.is-dragging {
-  filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.95)) !important;
+  filter: drop-shadow(0 0 8px rgba(15, 41, 74, 0.95)) !important;
 }
 
 .btn-hobby-action {
@@ -5158,7 +5161,7 @@ body.memory-dialog-open {
 
 @media (min-width: 768px) and (max-width: 1024px) {
   .hobbies-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
     max-width: 100%;
     margin: 0 auto;
     gap: 1.25rem;
