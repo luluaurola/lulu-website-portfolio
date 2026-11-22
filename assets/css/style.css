@@ -2751,15 +2751,24 @@ body {
   pointer-events: auto;
 }
 
-/* Solid white background under transparent cardcover */
+/* 3. Unsolved Piece (Default): Solid white background, soft light blue outline */
 .jigsaw-piece-bg {
   fill: #ffffff;
+  transition: fill 0.2s ease;
 }
 
-/* Subtle grayish-light-blue jigsaw border line */
+.jigsaw-piece-tint {
+  fill: transparent;
+  pointer-events: none;
+  transition: fill 0.2s ease;
+}
+
 .jigsaw-piece-stroke {
-  stroke: #b9c8ea;
-  stroke-width: 1.5;
+  stroke: #8fc2fc;
+  stroke-width: 1.6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
   transition: stroke 0.2s ease, stroke-width 0.2s ease;
 }
 
@@ -2767,14 +2776,23 @@ body {
   filter: drop-shadow(0 2px 6px rgba(15, 41, 74, 0.16));
 }
 
-/* Distinct indicator for piece in correct slot: elevated on top of unplaced pieces */
+/* 1. Correct Piece (Snap in place): Soft pastel green highlight, soft green outline */
 .puzzle-piece.is-correct-slot {
-  z-index: 20;
+  z-index: 15;
+  filter: drop-shadow(0 2px 8px rgba(34, 197, 94, 0.22));
+}
+
+.puzzle-piece.is-correct-slot .jigsaw-piece-bg {
+  fill: #ecfdf5;
+}
+
+.puzzle-piece.is-correct-slot .jigsaw-piece-tint {
+  fill: rgba(34, 197, 94, 0.12);
 }
 
 .puzzle-piece.is-correct-slot .jigsaw-piece-stroke {
-  stroke: #0f294a !important;
-  stroke-width: 4px !important;
+  stroke: #22c55e !important;
+  stroke-width: 2.2px !important;
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 1 !important;
@@ -2782,48 +2800,63 @@ body {
   vector-effect: non-scaling-stroke;
 }
 
-/* Selected piece (tap to swap): elevated with drop-shadow and bold outline */
+/* 2. Active Piece (Selected or Dragging): Light blue highlight, bolder navy outline.
+   Must completely override correct state styles so active and correct never clash. */
 .puzzle-piece.is-selected {
   transform: translateY(-4px) scale(1.05);
-  z-index: 50;
-  filter: drop-shadow(0 6px 14px rgba(15, 41, 74, 0.28));
+  z-index: 60 !important;
+  filter: drop-shadow(0 8px 18px rgba(15, 41, 74, 0.28)) !important;
 }
 
-.puzzle-piece.is-selected .jigsaw-piece-stroke {
-  stroke: #0f294a;
-  stroke-width: 3.8;
+.puzzle-piece.is-selected .jigsaw-piece-bg,
+.puzzle-piece.is-dragging .jigsaw-piece-bg {
+  fill: #eff6ff !important;
 }
 
-/* Dragging piece: follows pointer smoothly */
+.puzzle-piece.is-selected .jigsaw-piece-tint,
+.puzzle-piece.is-dragging .jigsaw-piece-tint {
+  fill: rgba(59, 130, 246, 0.16) !important;
+}
+
+.puzzle-piece.is-selected .jigsaw-piece-stroke,
+.puzzle-piece.is-dragging .jigsaw-piece-stroke {
+  stroke: #0f294a !important;
+  stroke-width: 3.2px !important;
+  stroke-dasharray: none !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Dragging piece: follows pointer smoothly with elevated shadow */
 .puzzle-piece.is-dragging {
   cursor: grabbing !important;
   z-index: 100 !important;
-  filter: drop-shadow(0 10px 22px rgba(15, 41, 74, 0.35)) !important;
+  filter: drop-shadow(0 12px 24px rgba(15, 41, 74, 0.35)) !important;
   transition: none !important;
-}
-
-.puzzle-piece.is-dragging .jigsaw-piece-stroke {
-  stroke: #0f294a;
-  stroke-width: 3.8;
 }
 
 /* Drop target hover while dragging another piece over it */
 .puzzle-piece.is-drop-target .jigsaw-piece-stroke {
-  stroke: #0284c7;
-  stroke-width: 3.8;
-  stroke-dasharray: 4 2;
+  stroke: #0284c7 !important;
+  stroke-width: 3px !important;
+  stroke-dasharray: 4 2 !important;
 }
 
-/* Solved board styling: maintain clear blue outline indicator on every correctly placed piece */
+/* Solved board styling: maintain soft green outline and subtle glow on every piece */
 .puzzle-board.is-solved .puzzle-piece.is-correct-slot .jigsaw-piece-stroke,
 .puzzle-board.is-solved .puzzle-piece .jigsaw-piece-stroke {
-  stroke: #0f294a !important;
-  stroke-width: 4px !important;
+  stroke: #22c55e !important;
+  stroke-width: 2.2px !important;
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 1 !important;
   visibility: visible !important;
   vector-effect: non-scaling-stroke;
+}
+
+.puzzle-board.is-solved .puzzle-piece .jigsaw-piece-tint {
+  fill: rgba(34, 197, 94, 0.08) !important;
 }
 
 /* Peek Overlay (Lihat Petunjuk - Hover Preview) */
@@ -3050,13 +3083,19 @@ body {
 }
 
 [data-theme="dark"] .jigsaw-piece-stroke {
-  stroke: #b9c8ea;
+  stroke: #8fc2fc;
 }
 
 [data-theme="dark"] .puzzle-piece.is-correct-slot .jigsaw-piece-stroke,
 [data-theme="dark"] .puzzle-board.is-solved .puzzle-piece .jigsaw-piece-stroke {
+  stroke: #22c55e !important;
+  stroke-width: 2.2px !important;
+}
+
+[data-theme="dark"] .puzzle-piece.is-selected .jigsaw-piece-stroke,
+[data-theme="dark"] .puzzle-piece.is-dragging .jigsaw-piece-stroke {
   stroke: #0f294a !important;
-  stroke-width: 4px !important;
+  stroke-width: 3.2px !important;
 }
 
 .btn-hobby-action {
@@ -3117,7 +3156,7 @@ body {
   justify-content: center;
   gap: 0.55rem;
   padding: 0 1rem;
-  background-color: #eaf2fd;
+  background-color: #ffffff;
   color: var(--color-navy);
   font-family: var(--font-display);
   font-size: 1.2rem;
