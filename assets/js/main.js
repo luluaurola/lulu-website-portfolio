@@ -1662,7 +1662,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // 1. Simpan URL di satu konstanta (LB_URL) di main.js supaya mudah diganti
-  const MEMORY_LEADERBOARD_STORAGE_KEY = 'lulu-memory-leaderboard';
+  const MEMORY_LEADERBOARD_STORAGE_KEY = 'lulu-memory-leaderboard-v2';
   let lastLeaderboardFetchTime = 0;
   const LEADERBOARD_FETCH_THROTTLE_MS = 30000; // 30 detik
   let memoryTimerInterval = null;
@@ -1875,76 +1875,19 @@ document.addEventListener('DOMContentLoaded', () => {
     return list;
   }
 
-  const DEFAULT_LEADERBOARD_SEED = [
-    { nama: 'Lulu', waktu: 43, langkah: 26 },
-    { nama: 'ridwan', waktu: 43, langkah: 26 },
-    { nama: 'amel', waktu: 43, langkah: 26 },
-    { nama: 'amel23', waktu: 43, langkah: 26 },
-    { nama: 'zaki', waktu: 43, langkah: 26 },
-    { nama: 'tomas', waktu: 43, langkah: 26 },
-    { nama: 'thomas', waktu: 43, langkah: 26 },
-    { nama: 'thomas14', waktu: 43, langkah: 26 },
-    { nama: 'ulul23', waktu: 43, langkah: 26 },
-    { nama: 'Dimas', waktu: 45, langkah: 27 },
-    { nama: 'Sarah', waktu: 46, langkah: 28 },
-    { nama: 'Fajar', waktu: 47, langkah: 28 },
-    { nama: 'Nabila', waktu: 49, langkah: 29 },
-    { nama: 'Kevin', waktu: 50, langkah: 30 },
-    { nama: 'Jessica', waktu: 52, langkah: 31 },
-    { nama: 'Budi', waktu: 53, langkah: 31 },
-    { nama: 'Anita', waktu: 55, langkah: 32 },
-    { nama: 'Rizky', waktu: 56, langkah: 33 },
-    { nama: 'Putri', waktu: 58, langkah: 34 },
-    { nama: 'Daniel', waktu: 59, langkah: 34 },
-    { nama: 'Maya', waktu: 61, langkah: 35 },
-    { nama: 'Andre', waktu: 63, langkah: 36 },
-    { nama: 'Cindy', waktu: 65, langkah: 36 },
-    { nama: 'Hendra', waktu: 66, langkah: 37 },
-    { nama: 'Tiara', waktu: 68, langkah: 38 },
-    { nama: 'Rian', waktu: 70, langkah: 39 },
-    { nama: 'Bella', waktu: 72, langkah: 40 },
-    { nama: 'Agung', waktu: 74, langkah: 40 },
-    { nama: 'Dinda', waktu: 76, langkah: 41 },
-    { nama: 'Eko', waktu: 78, langkah: 42 },
-    { nama: 'Nadia', waktu: 80, langkah: 43 },
-    { nama: 'Gilang', waktu: 82, langkah: 44 },
-    { nama: 'Fitri', waktu: 85, langkah: 45 },
-    { nama: 'Arif', waktu: 87, langkah: 46 },
-    { nama: 'Vina', waktu: 90, langkah: 47 },
-    { nama: 'Surya', waktu: 92, langkah: 48 },
-    { nama: 'Intan', waktu: 95, langkah: 49 },
-    { nama: 'Bayu', waktu: 98, langkah: 50 },
-    { nama: 'Clarissa', waktu: 100, langkah: 51 },
-    { nama: 'Rendy', waktu: 103, langkah: 52 },
-    { nama: 'Ratna', waktu: 106, langkah: 53 },
-    { nama: 'Ilham', waktu: 109, langkah: 54 },
-    { nama: 'Tari', waktu: 112, langkah: 55 },
-    { nama: 'Bagas', waktu: 115, langkah: 56 },
-    { nama: 'Wulan', waktu: 118, langkah: 57 },
-    { nama: 'Doni', waktu: 122, langkah: 59 },
-    { nama: 'Siska', waktu: 126, langkah: 60 },
-    { nama: 'Wahyu', waktu: 130, langkah: 62 },
-    { nama: 'Tania', waktu: 135, langkah: 64 },
-    { nama: 'Yudi', waktu: 140, langkah: 66 }
-  ];
+  const DEFAULT_LEADERBOARD_SEED = [];
 
   function loadLeaderboard() {
     try {
       const raw = localStorage.getItem(MEMORY_LEADERBOARD_STORAGE_KEY);
-      if (!raw) {
-        const seedList = normalizeLeaderboardList(DEFAULT_LEADERBOARD_SEED);
-        saveLeaderboard(seedList);
-        return seedList;
-      }
+      if (!raw) return [];
       const parsed = JSON.parse(raw);
       if (Array.isArray(parsed) && parsed.length > 0) {
         return normalizeLeaderboardList(parsed);
       }
-      const seedList = normalizeLeaderboardList(DEFAULT_LEADERBOARD_SEED);
-      saveLeaderboard(seedList);
-      return seedList;
+      return [];
     } catch (e) {
-      return normalizeLeaderboardList(DEFAULT_LEADERBOARD_SEED);
+      return [];
     }
   }
 
@@ -2212,15 +2155,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
       console.log(`[Leaderboard] Diterima dari server Google Sheets (${LB_URL}):`, rawList ? rawList.length : 0, 'pemain.');
 
-      const currentLocal = loadLeaderboard();
-      const remoteList = (rawList && rawList.length > 0) ? normalizeLeaderboardList(rawList) : [];
-      // Gabungkan data server dengan cache lokal pemain agar tidak hilang tertimpa
-      const combined = normalizeLeaderboardList([...remoteList, ...currentLocal]);
+      if (rawList && Array.isArray(rawList)) {
+        // Ambil data murni dari Google Sheets melalui Google Apps Script (tanpa data dummy)
+        let remoteList = normalizeLeaderboardList(rawList);
 
-      saveLeaderboard(combined);
-      renderLeaderboard(combined);
-      syncCurrentPlayerBestScoreFromLeaderboard(combined);
-      updatePlayerButton();
+        // Pastikan leaderboard dapat mengambil hingga 50 pemain dan menampilkan seluruh data yang tersedia
+        if (remoteList.length > 50) {
+          remoteList = remoteList.slice(0, 50);
+        }
+
+        saveLeaderboard(remoteList);
+        renderLeaderboard(remoteList);
+        syncCurrentPlayerBestScoreFromLeaderboard(remoteList);
+        updatePlayerButton();
+      } else {
+        const fallbackList = loadLeaderboard();
+        if (fallbackList && fallbackList.length > 0) {
+          renderLeaderboard(fallbackList);
+        } else {
+          showLeaderboardStatus('empty', 'Belum ada skor. Jadilah yang pertama!');
+        }
+      }
     } catch (err) {
       console.warn('Gagal memuat leaderboard:', err);
       // Kalau gagal (misal offline/sandbox), tetap tampilkan cache leaderboard lokal dengan mulus
