@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Lulu's Studio - Personal Portfolio Website">
+    <title>Lulu's Studio - Portfolio</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,400;0,700;1,400&amp;family=Lato:ital,wght@0,400;0,700;1,400&amp;family=Lilita+One&amp;family=Sniglet:wght@400;800&amp;display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <header class="site-header" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="brand" aria-label="Lulu's Studio Home">
+                <img src="assets/image/self.png" alt="Lulu" class="brand-icon">
+                <div class="brand-text">
+                    <span class="brand-title">Lulu's</span>
+                    <span class="brand-subtitle">Studio</span>
+                </div>
+            </a>
+
+            <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu"
+                aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+
+            <nav class="nav-menu" id="nav-menu">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#home" class="nav-link active">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#about" class="nav-link">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#project" class="nav-link">Project</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#skills" class="nav-link">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#hobbies" class="nav-link">Hobbies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#contact" class="nav-link">Contact</a>
+                    </li>
+                </ul>
+
+                <button type="button" class="theme-toggle-btn" id="theme-toggle"
+                    aria-label="Toggle light and dark theme">
+                    <img src="assets/image/logo/dark.png" alt="Toggle Theme" class="theme-icon" id="theme-icon">
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="content-wrapper">
+        <section class="section hero-section" id="home">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Welcome to<br>
+                    Lulu’s Studio
+                </h1>
+                <p class="hero-description">
+                    Website ini adalah ruang untuk mengenal saya lebih jauh, melihat karya-karya saya, dan mengetahui
+                    lebih banyak tentang perjalanan kreatif saya. Enjoy!!
+                </p>
+                <a href="#about" class="btn-explore">LET’S EXPLORE!</a>
+            </div>
+            <section class="hero-visual" tabindex="0"
+                aria-label="Karakter ilustrasi, arahkan kursor untuk berinteraksi">
+                <div class="avatar-backdrop"></div>
+                <div class="avatar-companions">
+                    <img src="assets/image/pokemon/oshawot.png" alt="Oshawott"
+                        class="companion-pokemon companion-oshawott">
+                    <img src="assets/image/pokemon/pikachu.png" alt="Pikachu"
+                        class="companion-pokemon companion-pikachu">
+                    <img src="assets/image/pokemon/snorlax.png" alt="Snorlax"
+                        class="companion-pokemon companion-snorlax">
+                </div>
+                <img src="assets/image/self.png" alt="Lulu's Avatar Illustration" class="avatar-img">
+                <div class="hero-speech-bubble" id="hero-speech-bubble" aria-hidden="true">
+                    <svg class="hero-speech-svg" id="hero-speech-svg" viewBox="0 0 254 48" aria-hidden="true">
+                        <path class="hero-speech-path" id="hero-speech-path"
+                            d="M 15 11 L 24.5 11 L 32 1 L 39.5 11 L 239 11 A 14 14 0 0 1 253 25 L 253 33 A 14 14 0 0 1 239 47 L 15 47 A 14 14 0 0 1 1 33 L 1 25 A 14 14 0 0 1 15 11 Z"
+                            vector-effect="non-scaling-stroke"></path>
+                    </svg>
+                    <span class="hero-speech-text">
+                        <span class="hero-speech-hover">Psst, coba arahkan kursor ke aku!</span>
+                        <span class="hero-speech-touch">Ketuk aku!</span>
+                    </span>
+                </div>
+            </section>
+        </section>
+
+        <section class="section about-section" id="about">
+            <div class="about-card-wrapper" id="about-card-wrapper">
+                <img src="assets/image/pokemon/pikachu.png" alt="Ilustrasi kepala Pikachu" class="about-card-pikachu"
+                    id="about-pikachu">
+                <div class="about-card" id="about-card">
+                    <h2 class="about-title">Hi, I'm Lulu!</h2>
+                    <p class="about-text">
+                        Halo! Saya Lulu Aurola Virginia, tapi kamu bisa memanggil saya Lulu. Saya adalah seorang Graphic
+                        Designer yang senang mengeksplorasi ide melalui visual dan desain.
+                    </p>
+                </div>
+            </div>
+            <div class="about-image-wrapper">
+                <img src="assets/image/self-about.jpg" alt="Lulu Aurola Virginia" class="about-image">
+            </div>
+        </section>
+
+        <section class="section project-section" id="project">
+            <h2 class="project-heading">Featured Projects</h2>
+
+            <div class="projects-grid">
+                <div class="project-card-wrapper" id="project-wrapper-0">
+                    <img src="assets/image/pokemon/quaxly.png" alt="" aria-hidden="true"
+                        class="project-pokemon project-pokemon-quaxly" draggable="false">
+                    <div class="project-card" data-project-index="0">
+                        <div class="card-header">
+                            <span class="card-title">Lato &amp; Aleo</span>
+                            <span class="card-badge">Tipografi</span>
+                        </div>
+                        <button type="button" class="card-thumb card-thumb-btn card-thumb-photo"
+                            data-fb="pRE6emkitMz4N1uuScm2" data-title="Lato &amp; Aleo"
+                            aria-label="Buka flipbook Lato &amp; Aleo: Perkenalan Tipografi Lato &amp; Aleo">
+                            <img src="assets/image/project/tipografi.jpg" alt="Tipografi Lato &amp; Aleo"
+                                class="card-thumb-photo-img" loading="lazy" decoding="async" draggable="false">
+                            <span class="thumb-typography-hint thumb-photo-hint">
+                                <span>Klik untuk membaca</span>
+                            </span>
+                        </button>
+                        <div class="card-desc-box">Perkenalan Tipografi Lato &amp; Aleo</div>
+                        <div class="card-meta">
+                            <p class="card-desc-text">Perkenalan typeface Lato dan Aleo yang menampilkan karakter sans
+                                serif
+                                dan serif.</p>
+                            <div class="meta-footer">
+                                <span class="meta-no">No.001</span>
+                                <span class="meta-brand">Lulu’s Studio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-wrapper" id="project-wrapper-1">
+                    <img src="assets/image/pokemon/charmender.png" alt="Ilustrasi kepala Charmander"
+                        class="project-pokemon project-pokemon-charmender" draggable="false">
+                    <div class="project-card" data-project-index="1">
+                        <div class="card-header">
+                            <span class="card-title">The Science of Spice</span>
+                            <span class="card-badge">Buku</span>
+                        </div>
+                        <button type="button" class="card-thumb card-thumb-btn card-thumb-photo"
+                            data-fb="0BjYukqT3kjujXekYRbs" data-title="The Science of Spice"
+                            aria-label="Buka flipbook The Science of Spice: Redesain Buku The Science of Spice">
+                            <img src="assets/image/project/spice.jpg" alt="Buku The Science of Spice"
+                                class="card-thumb-photo-img" loading="lazy" decoding="async" draggable="false">
+                            <span class="thumb-typography-hint thumb-photo-hint">
+                                <span>Klik untuk membaca</span>
+                            </span>
+                        </button>
+                        <div class="card-desc-box">Redesain Buku The Science of Spice</div>
+                        <div class="card-meta">
+                            <p class="card-desc-text">Perancangan ulang desain buku The Science of Spice dalam 10
+                                halaman.
+                            </p>
+                            <div class="meta-footer">
+                                <span class="meta-no">No.002</span>
+                                <span class="meta-brand">Lulu's Studio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-wrapper" id="project-wrapper-2">
+                    <img src="assets/image/pokemon/psyduck.png" alt="" aria-hidden="true"
+                        class="project-pokemon project-pokemon-psyduck" draggable="false">
+                    <div class="project-card" data-project-index="2">
+                        <div class="card-header">
+                            <span class="card-title">Hotel Borobudur</span>
+                            <span class="card-badge">Logo</span>
+                        </div>
+                        <button type="button" class="card-thumb card-thumb-btn card-thumb-photo"
+                            data-fb="jk7uwvPEQuUPaZAzCb7Q" data-title="Hotel Borobudur"
+                            aria-label="Buka flipbook Hotel Borobudur: Rebranding Logo Hotel Borobudur">
+                            <img src="assets/image/project/borobudur.png" alt="Hotel Borobudur Jakarta"
+                                class="card-thumb-photo-img" loading="lazy" decoding="async" draggable="false">
+                            <span class="thumb-typography-hint thumb-photo-hint">
+                                <span>Klik untuk membaca</span>
+                            </span>
+                        </button>
+                        <div class="card-desc-box">Rebranding Logo Hotel Borobudur</div>
+                        <div class="card-meta">
+                            <p class="card-desc-text">Merancang ulang logo Hotel Borobudur dengan mempertahankan
+                                identitas
+                                dan karakter khas hotel.</p>
+                            <div class="meta-footer">
+                                <span class="meta-no">No.003</span>
+                                <span class="meta-brand">Lulu’s Studio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-wrapper extra-project" id="project-wrapper-3">
+                    <img src="assets/image/pokemon/ditto.png" alt="" aria-hidden="true"
+                        class="project-pokemon project-pokemon-ditto" draggable="false">
+                    <div class="project-card" data-project-index="3">
+                        <div class="card-header">
+                            <span class="card-title">Grenzy</span>
+                            <span class="card-badge">Packaging</span>
+                        </div>
+                        <button type="button" class="card-thumb card-thumb-btn card-thumb-photo"
+                            data-fb="KKIsuzl3C3PH5wYrf88g" data-title="Grenzy"
+                            aria-label="Buka flipbook Grenzy: Pembuatan Packaging Vegetable Leather">
+                            <img src="assets/image/project/grenzy.png" alt="Packaging Vegetable Leather Grenzy"
+                                class="card-thumb-photo-img" loading="lazy" decoding="async" draggable="false">
+                            <span class="thumb-typography-hint thumb-photo-hint">
+                                <span>Klik untuk membaca</span>
+                            </span>
+                        </button>
+                        <div class="card-desc-box">Pembuatan Packaging Vegetable Leather</div>
+                        <div class="card-meta">
+                            <p class="card-desc-text">Perancangan kemasan produk vegetable leather untuk proyek
+                                kolaborasi
+                                bersama mahasiswa Teknologi Pangan.</p>
+                            <div class="meta-footer">
+                                <span class="meta-no">No.004</span>
+                                <span class="meta-brand">Lulu's Studio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-wrapper extra-project" id="project-wrapper-4">
+                    <img src="assets/image/pokemon/piplup.png" alt="" aria-hidden="true"
+                        class="project-pokemon project-pokemon-piplup" draggable="false">
+                    <div class="project-card" data-project-index="4">
+                        <div class="card-header">
+                            <span class="card-title">Trifold</span>
+                            <span class="card-badge">Brosur</span>
+                        </div>
+                        <button type="button" class="card-thumb card-thumb-btn card-thumb-photo" data-title="Trifold"
+                            aria-label="Buka proyek Trifold: Pembuatan Brosur Trifold">
+                            <img src="assets/image/project/brosurdepan.jpg" alt="Brosur Trifold"
+                                class="card-thumb-photo-img" loading="lazy" decoding="async" draggable="false">
+                            <span class="thumb-typography-hint thumb-photo-hint">
+                                <span>Klik untuk membaca</span>
+                            </span>
+                        </button>
+                        <div class="card-desc-box">Pembuatan Brosur Trifold</div>
+                        <div class="card-meta">
+                            <p class="card-desc-text">Pembuatan brosur lipat tiga dengan penyusunan informasi dan elemen
+                                visual yang terstruktur dan menarik.</p>
+                            <div class="meta-footer">
+                                <span class="meta-no">No.005</span>
+                                <span class="meta-brand">Lulu’s Studio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card-wrapper extra-project" id="project-wrapper-5">
+                    <img src="assets/image/pokemon/minccino.png" alt="" aria-hidden="true"
+                        class="project-pokemon project-pokemon-minccino" draggable="false">
+                    <div class="project-card" data-project-index="5">
+                        <div class="card-header">
+                            <span class="card-title">Perspektif 1 Titik</span>
+                            <span class="card-badge">Perspektif</span>
+                        </div>
+                        <button type="button" class="card-thumb card-thumb-btn card-thumb-photo"
+                            data-title="Perspektif 1 Titik"
+                            aria-label="Buka proyek Perspektif 1 Titik: Menggambar Perspektif Satu Titik Hilang">
+                            <img src="assets/image/project/perspektifsatutitik.jpg" alt="Perspektif 1 Titik"
+                                class="card-thumb-photo-img" loading="lazy" decoding="async" draggable="false">
+                            <span class="thumb-typography-hint thumb-photo-hint">
+                                <span>Klik untuk membaca</span>
+                            </span>
+                        </button>
+                        <div class="card-desc-box">Menggambar Perspektif Satu Titik Hilang</div>
+                        <div class="card-meta">
+                            <p class="card-desc-text">Menggambar interior perpustakaan dengan teknik perspektif satu
+                                titik hilang untuk menciptakan kesan kedalaman ruang.</p>
+                            <div class="meta-footer">
+                                <span class="meta-no">No.006</span>
+                                <span class="meta-brand">Lulu’s Studio</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-action" id="project-action">
+                <button type="button" class="btn-see-more" id="btn-see-more">See More</button>
+            </div>
+
+            <div class="project-slider-controls">
+                <button type="button" class="slider-nav-btn prev" id="slider-prev" aria-label="Project Sebelumnya">
+                    <svg class="slider-arrow-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor"
+                        stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <div class="slider-dots" id="slider-dots" role="tablist" aria-label="Indikator Slider Project"></div>
+                <button type="button" class="slider-nav-btn next" id="slider-next" aria-label="Project Berikutnya">
+                    <svg class="slider-arrow-icon" viewBox="0 0 24 24" width="18" height="18" stroke="currentColor"
+                        stroke-width="2.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <section class="section skills-section" id="skills">
+            <h2 class="skills-heading">Skills</h2>
+
+            <div class="skills-groups">
+                <div class="skills-group">
+                    <h3 class="skills-group-title">Desain &amp; Illustrasi</h3>
+                    <div class="skills-grid cols-3">
+                        <div class="skill-card-wrapper" id="photoshop-card-wrapper">
+                            <img src="assets/image/pokemon/oshawot.png" alt="Ilustrasi kepala Oshawott"
+                                class="skill-pokemon-oshawott skill-oshawott-mobile" id="skill-oshawott-mobile" aria-hidden="true">
+                            <div class="skill-card">
+                                <img src="assets/image/logo/photoshop.png" alt="Photoshop" class="skill-icon">
+                                <div class="skill-info">
+                                    <h4 class="skill-title">Photoshop</h4>
+                                    <p class="skill-desc">Mengolah dan memanipulasi foto.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <img src="assets/image/logo/illustrator.png" alt="Illustrator" class="skill-icon">
+                            <div class="skill-info">
+                                <h4 class="skill-title">Illustrator</h4>
+                                <p class="skill-desc">Membuat ilustrasi, desain grafis, dan elemen visual.</p>
+                            </div>
+                        </div>
+
+                        <div class="skill-card-wrapper" id="indesign-card-wrapper">
+                            <img src="assets/image/pokemon/oshawot.png" alt="Ilustrasi kepala Oshawott"
+                                class="skill-pokemon-oshawott skill-oshawott-desktop" id="skill-oshawott" aria-hidden="true">
+                            <div class="skill-card">
+                                <img src="assets/image/logo/indesign.png" alt="InDesign" class="skill-icon">
+                                <div class="skill-info">
+                                    <h4 class="skill-title">InDesign</h4>
+                                    <p class="skill-desc">Menyusun layout buku dan brosur.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-group">
+                    <h3 class="skills-group-title">Video &amp; Presentasi</h3>
+                    <div class="skills-grid cols-2">
+                        <div class="skill-card">
+                            <img src="assets/image/logo/premiere.png" alt="Premiere Pro" class="skill-icon">
+                            <div class="skill-info">
+                                <h4 class="skill-title">Premiere Pro</h4>
+                                <p class="skill-desc">Mengedit dan menyusun video.</p>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <img src="assets/image/logo/canva.png" alt="Canva" class="skill-icon">
+                            <div class="skill-info">
+                                <h4 class="skill-title">Canva</h4>
+                                <p class="skill-desc">Membuat presentasi dan berbagai desain visual.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="skills-group">
+                    <h3 class="skills-group-title">UI/UX &amp; Web</h3>
+                    <div class="skills-grid cols-2">
+                        <div class="skill-card">
+                            <img src="assets/image/logo/figma.png" alt="Figma" class="skill-icon">
+                            <div class="skill-info">
+                                <h4 class="skill-title">Figma</h4>
+                                <p class="skill-desc">Merancang antarmuka aplikasi dan website serta membuat prototype
+                                    interaktif.</p>
+                            </div>
+                        </div>
+
+                        <div class="skill-card">
+                            <img src="assets/image/logo/antigravity.png" alt="Antigravity" class="skill-icon">
+                            <div class="skill-info">
+                                <h4 class="skill-title">Antigravity</h4>
+                                <p class="skill-desc">Membantu proses pengembangan website dengan dukungan AI.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section hobbies-section" id="hobbies">
+            <h2 class="hobbies-heading">Hobbies</h2>
+
+            <div class="hobbies-grid">
+                <div class="hobby-card">
+                    <div class="hobby-card-content">
+                        <h3 class="hobby-card-title">Koleksi Kartu</h3>
+                        <p class="hobby-text">
+                            Aku suka mengoleksi berbagai kartu, terutama kartu pokemon, untuk mencari kartu-kartu
+                            langka! Aku juga suka
+                            membuka booster pack untuk menambah koleksiku.
+                        </p>
+                        <div class="hobby-invite-box">
+                            <h4 class="hobby-invite-title">Let's Play &amp; Collect!</h4>
+                            <p class="hobby-text hobby-text-invite">
+                                Yuk, coba permainan di bawah ini! Buka kartu satu per satu, temukan semua karakter, dan
+                                lengkapi koleksimu!
+                            </p>
+                        </div>
+
+                        <div class="hobby-preview-bar" id="preview-cards-bar" tabindex="0"
+                            aria-label="Preview 10 kartu yang bisa ditemukan">
+                            <span>Preview</span>
+                        </div>
+
+                        <div class="mobile-preview-strip" id="mobile-preview-strip">
+                            <div class="preview-mini-card"></div>
+                            <div class="preview-mini-card"></div>
+                            <div class="preview-mini-card"></div>
+                            <div class="preview-mini-card"></div>
+                            <div class="preview-mini-card"></div>
+                            <div class="preview-mini-card"></div>
+                            <div class="preview-mini-card"></div>
+                            <div class="preview-mini-card"></div>
+                            <div class="preview-mini-card"></div>
+                            <div class="preview-mini-card"></div>
+                        </div>
+
+                        <div class="collection-grid-container" id="collection-grid-container">
+                            <div class="card-pack-grid game-grid" id="card-game-grid">
+                                <div class="pack-card"><span class="card-slot-q">?</span></div>
+                                <div class="pack-card"><span class="card-slot-q">?</span></div>
+                                <div class="pack-card"><span class="card-slot-q">?</span></div>
+                                <div class="pack-card"><span class="card-slot-q">?</span></div>
+                                <div class="pack-card"><span class="card-slot-q">?</span></div>
+                                <div class="pack-card"><span class="card-slot-q">?</span></div>
+                                <div class="pack-card"><span class="card-slot-q">?</span></div>
+                                <div class="pack-card"><span class="card-slot-q">?</span></div>
+                                <div class="pack-card"><span class="card-slot-q">?</span></div>
+                                <div class="pack-card"><span class="card-slot-q">?</span></div>
+                            </div>
+                            <div class="card-pack-grid preview-overlay-grid" id="preview-overlay-grid"
+                                aria-hidden="true">
+                                <div class="pack-card is-preview"></div>
+                                <div class="pack-card is-preview"></div>
+                                <div class="pack-card is-preview"></div>
+                                <div class="pack-card is-preview"></div>
+                                <div class="pack-card is-preview"></div>
+                                <div class="pack-card is-preview"></div>
+                                <div class="pack-card is-preview"></div>
+                                <div class="pack-card is-preview"></div>
+                                <div class="pack-card is-preview"></div>
+                                <div class="pack-card is-preview"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="hobby-btn-row">
+                        <button type="button" class="btn-hobby-action" id="btn-play-cards">Ayo Buka Pack!</button>
+                        <button type="button" class="btn-hobby-restart" id="btn-restart-cards"
+                            title="Reset dan ulangi permainan" aria-label="Restart koleksi kartu">
+                            <svg class="restart-icon" viewBox="0 0 24 24" width="20" height="20" fill="none"
+                                stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"
+                                aria-hidden="true">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                <polyline points="3 3 3 8 8 8"></polyline>
+                            </svg>
+                            <span>Restart</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="hobby-card hobby-card-puzzle">
+                    <div class="hobby-card-content">
+                        <h3 class="hobby-card-title">Susun &amp; Rakit</h3>
+                        <p class="hobby-text">
+                            Selain mengoleksi kartu, aku juga suka merakit balok susun (Lego atau sejenisnya) dan menyusun puzzle. Rasanya puas banget waktu potongan-potongan kecil akhirnya jadi satu bentuk utuh!
+                        </p>
+
+                        <div class="puzzle-invite-box">
+                            <h4 class="puzzle-invite-title">Ayo Susun!</h4>
+                            <p class="puzzle-invite-text">
+                                Yuk, mulai tantang dirimu lewat permainan di bawah ini! Susun potongan puzzle satu per satu hingga membentuk gambar utuh dan temukan hasil akhirnya!
+                            </p>
+                        </div>
+
+                        <div class="puzzle-game-area" id="puzzle-game-area">
+<div class="puzzle-level-bar" role="group" aria-label="Pilih Tingkat Kesulitan Puzzle">
+    <button type="button" class="puzzle-level-btn is-active" data-level="easy" aria-pressed="true">Easy (4×3)</button>
+    <button type="button" class="puzzle-level-btn" data-level="medium" aria-pressed="false">Medium (6×4)</button>
+    <button type="button" class="puzzle-level-btn" data-level="hard" aria-pressed="false">Hard (8×6)</button>
+</div>
+
+<div class="puzzle-stats-bar">
+    <div class="puzzle-stat-item">
+        <span class="puzzle-stat-label">Waktu</span>
+        <span class="puzzle-stat-value" id="puzzle-timer">00:00</span>
+    </div>
+    <div class="puzzle-stat-item">
+        <span class="puzzle-stat-label">Langkah</span>
+        <span class="puzzle-stat-value" id="puzzle-moves">0</span>
+    </div>
+    <div class="puzzle-stat-item">
+        <span class="puzzle-stat-label">Benar</span>
+        <span class="puzzle-stat-value" id="puzzle-progress">0 / 12</span>
+    </div>
+    <div class="puzzle-stat-item puzzle-stat-best">
+        <span class="puzzle-stat-label">Terbaik</span>
+        <span class="puzzle-stat-value puzzle-stat-best-val" id="puzzle-best">-</span>
+    </div>
+</div>
+
+                            <div class="puzzle-board-wrapper">
+                                <div class="puzzle-board" id="puzzle-board">
+                                    <div class="puzzle-grid-slots" id="puzzle-grid-slots"></div>
+                                    <div class="puzzle-peek-overlay" id="puzzle-peek-overlay" aria-hidden="true"></div>
+                                    <div class="puzzle-win-overlay" id="puzzle-win-overlay">
+                                        <div class="puzzle-win-card">
+                                            <span class="puzzle-win-badge">Selesai!</span>
+                                            <h4 class="puzzle-win-title">Puzzle Selesai!</h4>
+                                            <p class="puzzle-win-summary" id="puzzle-win-summary">Waktu: 00:00 • Langkah: 0</p>
+                                            <button type="button" class="btn-hobby-action puzzle-btn-again" id="btn-puzzle-again">Main Lagi</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="puzzle-action-bar">
+                                <button type="button" class="puzzle-action-btn" id="btn-puzzle-reset">
+                                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                                        <polyline points="3 3 3 8 8 8"></polyline>
+                                    </svg>
+                                    <span>Acak Ulang</span>
+                                </button>
+                                <button type="button" class="puzzle-action-btn" id="btn-puzzle-peek">
+                                    <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                        <circle cx="12" cy="12" r="3"></circle>
+                                    </svg>
+                                    <span>Lihat Petunjuk</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hobbies-bottom-panel" id="hobbies-bottom-panel">
+                <div class="hobbies-tablist" role="tablist" aria-label="Pilihan Permainan Koleksi Kartu"
+                    id="hobbies-tablist">
+                    <button type="button" role="tab" id="tab-pack" aria-selected="true" aria-controls="panel-pack"
+                        tabindex="0" class="hobby-tab-btn is-active">
+                        <span>Buka Pack</span>
+                    </button>
+                    <button type="button" role="tab" id="tab-memory" aria-selected="false" aria-controls="panel-memory"
+                        tabindex="-1" class="hobby-tab-btn">
+                        <span>Memory Game</span>
+                    </button>
+                </div>
+
+                <div class="hobby-tabpanel is-active" id="panel-pack" role="tabpanel" aria-labelledby="tab-pack"
+                    tabindex="0">
+                    <div class="hobbies-cards-display" id="mystery-cards-display">
+                        <button type="button" class="big-mystery-card" aria-label="Buka Booster Pack Misteri 1">
+                            <span class="pack-card-visual">
+                                <img src="assets/image/pokemon/cardcover.png" alt="Lulu's Studio Booster Pack"
+                                    class="pack-card-full-img">
+                                <span class="pack-crimp-overlay pack-crimp-top"></span>
+                                <span class="pack-tear-line-overlay"></span>
+                                <span class="pack-crimp-overlay pack-crimp-bottom"></span>
+                            </span>
+                        </button>
+                        <button type="button" class="big-mystery-card" aria-label="Buka Booster Pack Misteri 2">
+                            <span class="pack-card-visual">
+                                <img src="assets/image/pokemon/cardcover.png" alt="Lulu's Studio Booster Pack"
+                                    class="pack-card-full-img">
+                                <span class="pack-crimp-overlay pack-crimp-top"></span>
+                                <span class="pack-tear-line-overlay"></span>
+                                <span class="pack-crimp-overlay pack-crimp-bottom"></span>
+                            </span>
+                        </button>
+                        <button type="button" class="big-mystery-card" aria-label="Buka Booster Pack Misteri 3">
+                            <span class="pack-card-visual">
+                                <img src="assets/image/pokemon/cardcover.png" alt="Lulu's Studio Booster Pack"
+                                    class="pack-card-full-img">
+                                <span class="pack-crimp-overlay pack-crimp-top"></span>
+                                <span class="pack-tear-line-overlay"></span>
+                                <span class="pack-crimp-overlay pack-crimp-bottom"></span>
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="collection-complete-card" id="collection-complete-card">
+                        <span class="complete-badge">10 / 10 Kartu Terkumpul!</span>
+                        <h3 class="complete-title">Koleksi Lengkap!</h3>
+                        <p class="complete-desc">Hebat! Kamu berhasil mengumpulkan semuanya. Sekarang buktikan ingatanmu
+                            di Memory Game!</p>
+                        <button type="button" class="btn-hobby-action btn-play-memory" id="btn-goto-memory">Main Memory
+                            Game</button>
+                    </div>
+                </div>
+
+                <div class="hobby-tabpanel" id="panel-memory" role="tabpanel" aria-labelledby="tab-memory" tabindex="0">
+                    <div class="memory-game-card" id="memory-game-card">
+                        <div class="memory-unified-layout">
+                            <div class="memory-pane-game" id="memory-pane-game">
+                                <div class="memory-header">
+                                    <div class="memory-title-wrap">
+                                        <h3 class="memory-title">Memory Game</h3>
+                                        <p class="memory-subtitle" id="memory-subtitle">Cocokkan 10 pasang kartu!</p>
+                                        <div class="memory-player-badge" id="memory-player-badge" hidden>
+                                            <svg class="player-badge-icon" viewBox="0 0 24 24" width="13" height="13"
+                                                fill="none" stroke="currentColor" stroke-width="2.3"
+                                                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                                <circle cx="12" cy="7" r="4"></circle>
+                                            </svg>
+                                            <span class="player-badge-text">Pemain: <strong class="player-badge-name"
+                                                    id="memory-player-badge-name"></strong></span>
+                                        </div>
+                                    </div>
+                                    <div class="memory-stats-grid" id="memory-stats-grid">
+                                        <div class="memory-stat-box stat-time-box">
+                                            <span class="stat-box-label">Waktu</span>
+                                            <div class="stat-box-val-row">
+                                                <svg class="stat-box-icon time-icon" viewBox="0 0 24 24" width="14"
+                                                    height="14" fill="none" stroke="currentColor" stroke-width="2.5"
+                                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                    <circle cx="12" cy="13" r="8"></circle>
+                                                    <path d="M12 9v4l2.5 1.5"></path>
+                                                    <path d="M12 5V2"></path>
+                                                    <path d="M9 2h6"></path>
+                                                </svg>
+                                                <span class="stat-box-val" id="memory-timer-count">00:00</span>
+                                            </div>
+                                        </div>
+                                        <div class="memory-stat-box stat-steps-box">
+                                            <span class="stat-box-label">Langkah</span>
+                                            <div class="stat-box-val-row">
+                                                <span class="stat-box-val" id="memory-steps-count">0</span>
+                                            </div>
+                                        </div>
+                                        <div class="memory-stat-box stat-pairs-box">
+                                            <span class="stat-box-label">Pasangan</span>
+                                            <div class="stat-box-val-row">
+                                                <svg class="stat-box-icon pairs-icon" viewBox="0 0 24 24" width="14"
+                                                    height="14" fill="none" stroke="currentColor" stroke-width="2.3"
+                                                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                                    <rect x="3" y="6" width="12" height="14" rx="2.5"></rect>
+                                                    <path d="M8 6V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-2">
+                                                    </path>
+                                                </svg>
+                                                <span class="stat-box-val" id="memory-pairs-count">0 / 10</span>
+                                            </div>
+                                        </div>
+                                        <div class="memory-stat-box stat-best-box" id="memory-stat-best">
+                                            <div class="stat-best-head">
+                                                <span class="stat-best-title">Skor Terbaik</span>
+                                            </div>
+                                            <div class="stat-best-score" id="memory-best-score">--:-- | -- langkah</div>
+                                        </div>
+                                        <button type="button" class="sr-only" id="btn-memory-header-restart"
+                                            aria-hidden="true" tabindex="-1"></button>
+                                    </div>
+                                </div>
+
+                                <div class="memory-action-bar is-hidden" id="memory-action-bar" hidden>
+                                    <div class="memory-action-item memory-hint-box" id="memory-hint-box">Buka dua kartu
+                                        yang sama</div>
+                                    <button type="button" class="memory-action-item btn-memory-board-restart"
+                                        id="btn-memory-board-restart" aria-label="Main lagi memory game">Main
+                                        Lagi</button>
+                                </div>
+
+                                <div class="sr-only" aria-live="polite" id="memory-aria-live"></div>
+
+                                <div class="memory-board-grid" id="memory-board-grid"></div>
+
+                                <div class="memory-completed-actions" id="memory-completed-actions">
+                                    <button type="button" class="btn-memory-bottom-action btn-bottom-play-again"
+                                        id="btn-memory-bottom-restart" aria-label="Mulai bermain memory game">
+                                        <svg class="action-btn-icon restart-icon" viewBox="0 0 24 24" width="18"
+                                            height="18" fill="none" stroke="currentColor" stroke-width="2.6"
+                                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M21 12a9 9 0 1 1-2.64-6.36L21 8"></path>
+                                            <polyline points="21 3 21 8 16 8"></polyline>
+                                        </svg>
+                                        <span id="btn-memory-bottom-restart-text">Ayo Mulai!</span>
+                                    </button>
+                                    <button type="button" class="btn-memory-bottom-action btn-bottom-open-result"
+                                        id="btn-memory-bottom-result" aria-label="Tulis nama atau lihat peringkat">
+                                        <svg class="action-btn-icon user-icon" viewBox="0 0 24 24" width="18"
+                                            height="18" fill="none" stroke="currentColor" stroke-width="2.4"
+                                            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                        <span id="btn-memory-bottom-result-text">Tulis Nama</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="memory-pane-leaderboard" id="memory-pane-leaderboard">
+                                <div class="leaderboard-header">
+                                    <div class="leaderboard-title-wrap">
+                                        <h3 class="leaderboard-title">Leaderboard</h3>
+                                        <p class="leaderboard-subtitle">Pemain dengan waktu tercepat</p>
+                                    </div>
+                                </div>
+                                <div class="leaderboard-card-box">
+                                    <div class="leaderboard-table-wrap">
+                                        <table class="leaderboard-table" aria-label="Papan Peringkat Memory Game">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col" class="th-rank">Rank</th>
+                                                    <th scope="col" class="th-name">Nama</th>
+                                                    <th scope="col" class="th-time">Waktu</th>
+                                                    <th scope="col" class="th-moves">Langkah</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="leaderboard-list-body"></tbody>
+                                        </table>
+                                        <div class="leaderboard-empty" id="leaderboard-empty">
+                                            <span class="empty-icon" aria-hidden="true"
+                                                id="leaderboard-empty-icon">🏆</span>
+                                            <p class="empty-text" id="leaderboard-empty-text">Belum ada skor. Jadilah
+                                                yang pertama!</p>
+                                        </div>
+                                    </div>
+                                    <div class="leaderboard-footer" id="leaderboard-footer">
+                                        <svg class="leaderboard-users-icon" viewBox="0 0 24 24" width="16" height="16"
+                                            fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"
+                                            stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="9" cy="7" r="4"></circle>
+                                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                        </svg>
+                                        <span class="leaderboard-total-count" id="leaderboard-total-count">Total 0
+                                            pemain</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section contact-section" id="contact">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2 class="contact-heading">Let's Connect!</h2>
+                    <p class="contact-description">
+                        Kalau kamu ingin ngobrol, berkolaborasi, atau sekadar menyapa, jangan ragu untuk menghubungiku!
+                    </p>
+
+                    <div class="contact-socials">
+                        <a href="https://www.instagram.com/luluaurola/" target="_blank" rel="noopener noreferrer"
+                            class="contact-social-btn" id="contact-instagram-link">
+                            <img src="assets/image/logo/instagram.png" alt="Instagram" class="contact-btn-img">
+                            <span>Instagram</span>
+                        </a>
+
+                        <div class="contact-email-container" id="contact-email-container">
+                            <button type="button" class="contact-social-btn contact-email-btn" id="contact-email-btn"
+                                aria-expanded="false" aria-controls="email-reveal-popover">
+                                <img src="assets/image/logo/email.png" alt="Email" class="contact-btn-img">
+                                <span id="contact-email-label">Email</span>
+                            </button>
+                            <div class="email-reveal-popover" id="email-reveal-popover">
+                                <div class="email-popover-arrow"></div>
+                                <div class="email-popover-header">
+                                    <span class="email-popover-title">Alamat Email</span>
+                                    <button type="button" class="email-popover-close" id="btn-close-email-popover"
+                                        aria-label="Tutup popup email">✕</button>
+                                </div>
+                                <div class="email-popover-body">
+                                    <span class="email-popover-link"
+                                        id="email-text-display">mvsluluaurola@gmail.com</span>
+                                </div>
+                                <div class="email-popover-actions">
+                                    <button type="button" class="btn-copy-email" id="btn-copy-email">
+                                        <span id="copy-btn-text">Salin</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="contact-card-wrapper" id="contact-card-wrapper">
+                    <img src="assets/image/pokemon/snorlax.png" alt="Ilustrasi kepala Snorlax"
+                        class="contact-pokemon contact-pokemon-snorlax" id="contact-snorlax">
+                    <div class="contact-card">
+                        <h3 class="contact-card-title">Kirim Pesan</h3>
+                        <p class="contact-card-subtitle">Jangan malu untuk menulis pesan ke aku</p>
+
+                        <div class="form-success-container" id="success-msg">
+                            <img src="assets/image/pokemon/oshawot.png" alt="Oshawott Tersenyum"
+                                class="success-oshawott-img">
+                            <h4 class="success-title">Terima kasih, pesanmu sudah masuk</h4>
+                            <p class="success-subtitle">Aku akan segera membaca dan merespons pesanmu!</p>
+                            <button type="button" class="btn-send-again" id="btn-send-again">Kirim Pesan Lain</button>
+                        </div>
+
+                        <form class="contact-form" id="f"
+                            action="https://docs.google.com/forms/d/e/1FAIpQLSeyB-IYJ5S344qxjSgDkFVbW9zXuoRRoS7TNYwqDIjb7wJuOg/formResponse"
+                            method="POST">
+                            <div class="form-group-hp" aria-hidden="true">
+                                <label for="contact-hp">Website (Kosongkan)</label>
+                                <input type="text" id="contact-hp" name="entry_hp" tabindex="-1" autocomplete="off">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-name" class="form-label">Nama</label>
+                                <input type="text" id="contact-name" name="entry.636835736" class="form-input" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-email" class="form-label">Email</label>
+                                <input type="email" id="contact-email" name="entry.2097540976" class="form-input"
+                                    required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Topik</label>
+                                <input type="hidden" id="contact-topic" name="entry.2077523094" value="Kolaborasi">
+                                <div class="topic-radios-hidden" aria-hidden="true">
+                                    <input type="radio" name="topic_radio" id="radio-kolaborasi" value="Kolaborasi"
+                                        checked tabindex="-1">
+                                    <input type="radio" name="topic_radio" id="radio-proyek-desain"
+                                        value="Proyek Desain" tabindex="-1">
+                                    <input type="radio" name="topic_radio" id="radio-menyapa" value="Menyapa"
+                                        tabindex="-1">
+                                    <input type="radio" name="topic_radio" id="radio-main-game" value="Main Game"
+                                        tabindex="-1">
+                                    <input type="radio" name="topic_radio" id="radio-lainnya" value="Lainnya"
+                                        tabindex="-1">
+                                </div>
+
+                                <div class="topic-pills-group">
+                                    <div class="topic-pills-row">
+                                        <button type="button" class="topic-pill active"
+                                            data-topic="Kolaborasi">Kolaborasi</button>
+                                        <button type="button" class="topic-pill" data-topic="Proyek Desain">Proyek
+                                            Desain</button>
+                                        <button type="button" class="topic-pill" data-topic="Menyapa">Menyapa</button>
+                                    </div>
+                                    <div class="topic-pills-row">
+                                        <button type="button" class="topic-pill" data-topic="Main Game">Main
+                                            Game</button>
+                                        <button type="button" class="topic-pill" data-topic="Lainnya"
+                                            id="pill-other">Lainnya</button>
+                                        <input type="text" id="custom-topic-input" class="form-input topic-custom-input"
+                                            placeholder="Tulis topik lainnya...">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="contact-message" class="form-label">Pesan</label>
+                                <textarea id="contact-message" name="entry.131253454" class="form-textarea" rows="4"
+                                    required></textarea>
+                            </div>
+
+                            <div id="err" class="form-error-msg" role="alert"></div>
+
+                            <button type="submit" class="btn-submit-message">Kirim Pesan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer" id="footer">
+        <div class="footer-container">
+            <p class="footer-text">© 2026 Lulu’s Studio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div class="pack-modal-overlay" id="pack-modal">
+        <div class="pack-modal-backdrop" id="pack-modal-backdrop"></div>
+        <button type="button" class="pack-modal-close" id="btn-close-pack-modal" aria-label="Tutup modal">✕</button>
+        <div class="pack-modal-content">
+            <div class="pack-stage" id="pack-stage">
+                <div class="booster-pack-wrapper" id="booster-pack-wrapper">
+                    <div class="revealed-card-container" id="revealed-card-container">
+                        <div class="revealed-card-inner" id="revealed-card-inner">
+                            <div class="card-face card-back">
+                                <div class="card-back-pattern">
+                                    <div class="card-back-sphere">
+                                        <div class="card-back-core"></div>
+                                    </div>
+                                    <span class="card-back-title">Lulu's TCG</span>
+                                </div>
+                            </div>
+                            <div class="card-face card-front" id="card-front-face">
+                                <div class="card-front-header">
+                                    <span class="card-front-name" id="card-front-name">Charmender</span>
+                                    <span class="card-front-badge" id="card-front-badge">Common</span>
+                                </div>
+                                <div class="card-front-artwork">
+                                    <img src="assets/image/pokemon/charmender.png" alt="Pokemon Card"
+                                        id="card-front-img" class="card-art-img">
+                                </div>
+                                <div class="card-front-footer">
+                                    <span class="card-front-no" id="card-front-no">No.001</span>
+                                    <span class="card-front-brand">Lulu's Studio</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="booster-pack" id="booster-pack">
+                        <div class="pack-body-foil" id="pack-body-foil">
+                            <div class="pack-body-inner">
+                                <img src="assets/image/pokemon/cardcover.png" alt="Lulu's Studio Pack"
+                                    class="pack-full-card-img">
+                                <div class="pack-crimp-overlay pack-crimp-bottom"></div>
+                                <div class="pack-foil-shimmer"></div>
+                            </div>
+                        </div>
+                        <div class="pack-top-strip" id="pack-top-strip">
+                            <div class="pack-top-inner">
+                                <img src="assets/image/pokemon/cardcover.png" alt="Lulu's Studio Pack"
+                                    class="pack-full-card-img">
+                                <div class="pack-crimp-overlay pack-crimp-top"></div>
+                            </div>
+                            <div class="pack-tear-line-overlay"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pack-actions" id="pack-actions">
+                    <button type="button" class="btn-inspect-close" id="btn-inspect-close"
+                        aria-label="Tutup modal">✕</button>
+                    <button type="button" class="btn-pack-again" id="btn-pack-again">Buka pack lagi</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="project-modal-overlay" id="project-card-modal" role="dialog" aria-modal="true"
+        aria-label="Detail Karya Project">
+        <div class="project-modal-backdrop" id="project-modal-backdrop"></div>
+        <div class="project-modal-content">
+            <button type="button" class="project-modal-close" id="btn-close-project-modal"
+                aria-label="Tutup modal karya">✕</button>
+
+            <div class="project-showcase-panel">
+                <div class="project-showcase-media">
+                    <img src="assets/image/pokemon/pikachu.png" alt="Project Artwork" id="showcase-img"
+                        class="showcase-img" draggable="false">
+                </div>
+
+                <div class="project-showcase-details">
+                    <div class="showcase-header">
+                        <h3 class="showcase-title" id="showcase-title">Pikachu Mascot Illustration</h3>
+                        <span class="showcase-badge" id="showcase-badge">Illustration</span>
+                    </div>
+
+                    <p class="showcase-desc" id="showcase-desc">
+                        Karya seni ilustrasi digital karakter Pikachu dengan gaya visual yang ramah, garis halus, dan
+                        ekspresi ceria.
+                    </p>
+
+                    <div class="showcase-tools-wrapper">
+                        <span class="showcase-tools-label">Tools:</span>
+                        <div class="showcase-tools-list" id="showcase-tools">
+                            <span class="showcase-tool-tag">Adobe Illustrator</span>
+                            <span class="showcase-tool-tag">Photoshop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <dialog class="flipbook-dialog" id="flipbook-dialog" aria-labelledby="flipbook-dialog-title">
+        <div class="flipbook-dialog-content">
+            <div class="card-header flipbook-dialog-header">
+                <span class="card-title flipbook-dialog-title" id="flipbook-dialog-title">Lato &amp; Aleo</span>
+                <div class="flipbook-dialog-header-actions">
+                    <span class="card-badge flipbook-dialog-badge" id="flipbook-dialog-badge">Tipografi</span>
+                    <button type="button" class="flipbook-close-btn flipbook-close-badge" id="flipbook-close-btn"
+                        aria-label="Tutup flipbook">✕</button>
+                </div>
+            </div>
+
+            <div class="card-thumb flipbook-thumb-frame">
+                <div class="flipbook-iframe-container" id="flipbook-iframe-container"></div>
+            </div>
+
+            <div class="flipbook-nav-controls" id="flipbook-nav-controls">
+                <button type="button" class="flipbook-nav-btn flipbook-prev-btn" id="flipbook-prev-btn"
+                    aria-label="Halaman sebelumnya">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+
+                <div class="flipbook-slide-indicator" id="flipbook-slide-indicator">
+                    <span class="slide-indicator-text" id="flipbook-slide-counter">1 / 2</span>
+                </div>
+
+                <button type="button" class="flipbook-nav-btn flipbook-next-btn" id="flipbook-next-btn"
+                    aria-label="Halaman selanjutnya">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.6"
+                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="card-desc-box flipbook-dialog-subtitle" id="flipbook-dialog-subtitle">Perkenalan Tipografi Lato
+                &amp; Aleo</div>
+
+            <div class="card-meta flipbook-dialog-meta">
+                <p class="card-desc-text flipbook-dialog-desc" id="flipbook-dialog-desc">Membuat tipografi pengenalan
+                    dua typeface, yaitu Lato dan Aleo, yang memiliki karakteristik berbeda melalui gaya sans serif dan
+                    serif. Perancangan ini berfokus pada eksplorasi bentuk huruf, ukuran teks, serta pengaturan
+                    komposisi dan tata letak untuk menampilkan keunikan masing-masing typeface dalam satu kesatuan
+                    visual yang menarik dan harmonis.</p>
+
+                <div class="flipbook-fallback-wrapper">
+                    <a href="https://flipbook.so/flip/pRE6emkitMz4N1uuScm2" target="_blank" rel="noopener noreferrer"
+                        class="flipbook-fallback-link" id="flipbook-fallback-link">
+                        <span>Tidak muncul? Buka flipbook di tab baru</span>
+                        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="project-dialog-extra-row" id="project-dialog-extra-row">
+                    <div class="project-dialog-keyword-box">
+                        <h4 class="project-dialog-box-title">Keyword</h4>
+                        <p class="project-dialog-keyword-text" id="project-dialog-keyword-text">Typography, Typeface, Lato, Aleo, Book, Sans Serif, Serif</p>
+                    </div>
+                    <div class="project-dialog-connect-box">
+                        <h4 class="project-dialog-box-title">Let's Connect!</h4>
+                        <div class="project-dialog-connect-grid">
+                            <a href="https://www.linkedin.com/in/lulu-aurola-3a2255375/" target="_blank" rel="noopener noreferrer" class="project-dialog-connect-item">
+                                <span class="connect-icon-wrap connect-icon-linkedin">
+                                    <img src="assets/image/logo/linkedin.png" alt="LinkedIn" class="connect-icon-img">
+                                </span>
+                                <span class="connect-text">Lulu Aurola</span>
+                            </a>
+                            <a href="https://wa.me/6281703312000" target="_blank" rel="noopener noreferrer" class="project-dialog-connect-item">
+                                <span class="connect-icon-wrap connect-icon-whatsapp">
+                                    <img src="assets/image/logo/whatsapp.png" alt="WhatsApp" class="connect-icon-img">
+                                </span>
+                                <span class="connect-text">081703312000</span>
+                            </a>
+                            <a href="https://www.instagram.com/luluaurola/" target="_blank" rel="noopener noreferrer" class="project-dialog-connect-item">
+                                <span class="connect-icon-wrap connect-icon-instagram">
+                                    <img src="assets/image/logo/instagram.png" alt="Instagram" class="connect-icon-img">
+                                </span>
+                                <span class="connect-text">@luluaurola</span>
+                            </a>
+                            <a href="mailto:mvsluluaurola@gmail.com" class="project-dialog-connect-item">
+                                <span class="connect-icon-wrap connect-icon-email">
+                                    <img src="assets/image/logo/email.png" alt="Email" class="connect-icon-img">
+                                </span>
+                                <span class="connect-text">mvsluluaurola@gmail.com</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="meta-footer flipbook-meta-footer">
+                    <span class="meta-no" id="flipbook-dialog-no">No.001</span>
+                    <span class="meta-brand">Lulu’s Studio</span>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog class="memory-win-dialog memory-register-dialog" id="memory-register-dialog"
+        aria-labelledby="memory-register-title">
+        <div class="memory-dialog-content">
+            <button type="button" class="memory-dialog-close" id="btn-register-close"
+                aria-label="Tutup dialog pendaftaran">✕</button>
+            <div class="register-badge-wrap">
+                <span class="register-badge" id="memory-register-badge">Pendaftaran Pemain</span>
+            </div>
+            <h4 class="win-title" id="memory-register-title">Siapa Nama Kamu?</h4>
+            <p class="win-desc" id="memory-register-desc">Catat namamu untuk memulai Memory Game dan mencatat rekor di
+                Leaderboard!</p>
+            <form class="leaderboard-submit-form" id="memory-register-form" novalidate>
+                <label for="memory-register-input" class="leaderboard-input-label">Nama pemain:</label>
+                <div class="leaderboard-input-group">
+                    <input type="text" id="memory-register-input" class="leaderboard-player-input"
+                        placeholder="Nama pemain..." maxlength="20" autocomplete="name" required>
+                    <button type="submit" class="btn-dialog-primary" id="btn-register-submit">Mulai Bermain</button>
+                </div>
+                <p class="leaderboard-submit-msg" id="memory-register-msg" aria-live="polite"></p>
+            </form>
+        </div>
+    </dialog>
+
+    <dialog class="memory-win-dialog" id="memory-win-dialog" aria-labelledby="memory-win-title">
+        <div class="memory-dialog-content">
+            <button type="button" class="memory-dialog-close" id="btn-memory-close" aria-label="Tutup dialog">✕</button>
+            <h4 class="win-title" id="memory-win-title">Selamat!</h4>
+            <p class="win-desc" id="memory-win-desc">Kamu menyelesaikan permainan dalam 00:00 dan 0 langkah!</p>
+            <form class="leaderboard-submit-form" id="leaderboard-submit-form">
+                <label for="leaderboard-player-name" class="leaderboard-input-label">Catat namamu di
+                    Leaderboard:</label>
+                <div class="leaderboard-input-group">
+                    <input type="text" id="leaderboard-player-name" class="leaderboard-player-input"
+                        placeholder="Nama pemain..." maxlength="20" autocomplete="name" required>
+                    <button type="submit" class="btn-dialog-primary btn-submit-score" id="btn-submit-score">Submit
+                        Score</button>
+                </div>
+                <p class="leaderboard-submit-msg" id="leaderboard-submit-msg" aria-live="polite"></p>
+            </form>
+            <div class="memory-rank-result" id="memory-rank-result" hidden>
+                <div class="rank-result-box">
+                    <p class="memory-rank-badge" id="memory-rank-badge">Kamu berhasil mendapatkan peringkat #1!</p>
+                    <p class="memory-rank-total" id="memory-rank-total">Dari pemain di Leaderboard.</p>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
